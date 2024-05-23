@@ -37,16 +37,19 @@
             }
         } 
 
-/*         public function listar(){
+        public function listarUsuario($dni){
             try {
                 $result = array();
-                $stm = $this->pdo->prepare( 'SELECT * FROM cetpagolocal');
+                $stm = $this->pdo->prepare( 'SELECT * FROM clientes WHERE dni = '.$dni);
                 $stm->Execute();
                 foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
                     $loc = new local();
-                    $loc->__Set('id', $r->id);
-                    $loc->__Set('denominacion', $r->denominacion);
-                    $loc->__Set('direccion', $r->direccion);
+                    $loc->__Set('dni', $r->dni);
+                    $loc->__Set('pwd', $r->pwd);
+                    $loc->__Set('nombre', $r->nombre);
+                    $loc->__Set('apellido', $r->apellido);
+                    $loc->__Set('telefono', $r->telefono);
+                    $loc->__Set('correo', $r->correo);
                     $result[] = $loc;
                 }
                 return $result;
@@ -54,16 +57,7 @@
                 die($e->getMessage());
             }
         }
-        public function Eliminar($id){
-            try{
-                $stm = $this->pdo->prepare("DELETE FROM cetpagolocal WHERE id = ?");                     
-                $stm->execute(array($id));
-            } catch (Exception $e) {
-                die($e->getMessage());
-            }
-        }
-
-        public function Actualizar(Local $data){
+        /*public function Actualizar(Local $data){
             try {
                 $stm = "UPDATE cetpagolocal SET denominacion = ?, direccion = ? WHERE id = ?";
                 $this->pdo->prepare($stm)->execute(array(
@@ -74,8 +68,28 @@
             } catch (Exception $e) {
                 die($e->getMessage());
             }
-        }
+        }*/
 
-        */
+        public function buscarPelicula(){
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare('SELECT * FROM pelicula');
+                $stm->Execute();
+                foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
+                    $loc = new local();
+                    $loc->__Set('nombrepelicula', $r->nombrepelicula);
+                    $loc->__Set('sinopsis', $r->sinopsis);
+                    $loc->__Set('director', $r->director);
+                    $loc->__Set('genero', $r->genero);
+                    $loc->__Set('idioma', $r->idioma);
+                    $loc->__Set('fechaestreno', $r->fechaestreno);
+                    $loc->__Set('duracion', $r->duracion);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
     }
 ?>

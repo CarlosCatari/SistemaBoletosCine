@@ -21,6 +21,7 @@
 
             if ($user === $dbuser && $pass === $dbpwd) {
                 $_SESSION['username'] = $dbnombre;
+                $_SESSION['dni'] = $dbuser;
                 header('Location: pages/inicio.php');
                 exit;
             } else {
