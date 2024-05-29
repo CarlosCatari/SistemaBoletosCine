@@ -12,13 +12,16 @@
                 <li class="nav-item"><a class="nav-link" href="datoscliente.php">Mis Datos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Salas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Boletos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Peliculas</a></li>
+                <li class="nav-item"><a class="nav-link" href="peliculas.php">Peliculas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Buscar pelicula" aria-label="Search">
                 <button class="btn btn-primary" type="submit">Buscar</button>
             </form>
+            <ul class="nav nav-underline ">
+                <li class="nav-item ms-3"><a class="nav-link" href="../loguin.php">Cerrar Sesion</a></li>
+            </ul>
             </div>
         </div>
     </nav>

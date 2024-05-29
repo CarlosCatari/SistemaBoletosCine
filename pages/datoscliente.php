@@ -26,29 +26,47 @@
             </div>
         </div>
     </nav>
-    <div>
-        <div class="container h3">Mis datos personales</div>
-        <table border="3">
-            <tr>
-                <th>DNI</th>
-                <th>Contraseña</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Telefono</th>
-                <th>Correo</th>
-            </tr>
+    
+    <div class="container-fluid d-flex justify-content-between align-items-end" >
+        <div style="font-size:2rem">Mis datos personales</div>
+        <a class="btn btn-info" href="#">Editar perfil</a>
+    </div>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="bg-white p-5 rounded-5 text-secondary" style="width:50rem">
             <?php foreach ($model -> listarUsuario($user) as $r): ?>
-            <tr> 
-                <td><?php echo $r->__get('dni'); ?></td>
-                <td><?php echo $r->__get('pwd'); ?></td>
-                <td><?php echo $r->__get('nombre'); ?></td>
-                <td><?php echo $r->__get('apellido'); ?></td>
-                <td><?php echo $r->__get('telefono'); ?></td>
-                <td><?php echo $r->__get('correo'); ?></td>
-            </tr>
+            <div class="d-flex justify-content-evenly align-items-center mb-3">
+                <div style="width:20rem">
+                    <p>DNI:</p>
+                    <p class="border border-primary p-3 rounded-4"><?php echo $r->__get('dni'); ?></p>
+                </div>
+                <div style="width:20rem">
+                    <p>Contraseña:</p>
+                    <p class="border border-primary p-3 rounded-4"><?php echo $r->__get('pwd'); ?></p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-evenly align-items-center mb-3">
+                <div style="width:20rem">
+                    <p>Nombre:</p>
+                    <p class="border border-primary p-3 rounded-4"><?php echo $r->__get('nombre'); ?></p>
+                </div>
+                <div style="width:20rem">
+                    <p>Apellido:</p>
+                    <p class="border border-primary p-3 rounded-4"><?php echo $r->__get('apellido'); ?></p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-evenly align-items-center mb-3">
+                <div style="width:20rem">
+                    <p>Telefono:</p>
+                    <p class="border border-primary p-3 rounded-4"><?php echo $r->__get('telefono'); ?></p>
+                </div>
+                <div style="width:20rem">
+                    <p>Correo electrónico:</p>
+                    <p class="border border-primary p-3 rounded-4"><?php echo $r->__get('correo'); ?></p>
+                </div>
+            </div>
             <?php endforeach; ?>
-    </table>
-    <a href="#">Editar perfil</a>
+        </div>
+    
     </div>
 </body>
 </html>

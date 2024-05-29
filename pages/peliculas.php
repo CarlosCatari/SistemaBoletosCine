@@ -31,26 +31,29 @@
             </div>
         </div>
     </nav>
-    <div class="h1">Peliculas</div>
-    
-        <?php
-            foreach ($model -> buscarPelicula() as $r): 
-        ?>
-        <div class="card">
-            <tr> 
-                <td><?php echo $r->__get('nombrepelicula'); ?></td><br>
-                <td><?php echo $r->__get('sinopsis'); ?></td><br>
-                <td><?php echo $r->__get('director'); ?></td><br>
-                <td><?php echo $r->__get('genero'); ?></td>
-                <td><?php echo $r->__get('idioma'); ?></td><br>
-                <td><?php echo $r->__get('fechaestreno'); ?></td>
-                <td><?php echo $r->__get('duracion'); ?></td>
+    <div class="container-fluid" >
+        <div style="font-size:2rem">Peliculas</div>
+    </div>
 
-            </tr>
+    <div class="container-fluid d-flex">
+        <?php foreach ($model->buscarPelicula() as $r): ?>
+        <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
+            <img src="../images/fondo_peliculas.jpg" class="card-img" alt="imagenpelicula">
+            <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
+                <div>
+                    <h5 class="card-title"><?php echo $r->__get('nombrepelicula'); ?></h5>
+                    
+                </div>
+                <div class="mt-auto">
+                    <p class="card-text"><?php echo $r->__get('sinopsis'); ?></p>
+                    <p class="card-text"><small><?php echo $r->__get('director'); ?></small></p>
+                    <a href="#" class="btn btn-primary">Comprar</a>
+                </div>
+            </div>
         </div>
         <?php endforeach;?>
-    
-    
+    </div>
+
 
 </body>
 <?php include('../est/footer.php'); ?>
