@@ -19,9 +19,9 @@
             <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item"><a class="nav-link" href="inicio.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="datoscliente.php">Mis Datos</a></li>
+                <li class="nav-item"><a class="nav-link active disabled" href="#">Peliculas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Salas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Boletos</a></li>
-                <li class="nav-item"><a class="nav-link active disabled" href="#">Peliculas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
             </ul>
             <form class="d-flex" role="search">
@@ -47,7 +47,7 @@
                 <div class="mt-auto">
                     <p class="card-text"><?php echo $r->__get('sinopsis'); ?></p>
                     <p class="card-text"><small><?php echo $r->__get('director'); ?></small></p>
-                    <a href="#" class="btn btn-primary">Comprar</a>
+                    <a href="salas.php" class="btn btn-primary">Comprar</a>
                 </div>
             </div>
         </div>

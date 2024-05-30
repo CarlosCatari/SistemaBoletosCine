@@ -9,10 +9,11 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">CineStar</a>
             <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item"><a class="nav-link" href="inicio.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="datoscliente.php">Mis Datos</a></li>
+                <li class="nav-item"><a class="nav-link" href="peliculas.php">Peliculas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Salas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Boletos</a></li>
-                <li class="nav-item"><a class="nav-link" href="peliculas.php">Peliculas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
             </ul>
             <form class="d-flex" role="search">
@@ -30,7 +31,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="h1">Cartelera</div>
-    <!-- <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col">
                 <img class="img-thumbnail" src="../images/guerra_civil.jpg" alt="">
@@ -48,6 +49,6 @@
                 <img class="img-thumbnail" src="../images/guerra_civil.jpg" alt="">
             </div>
         </div>
-    </div> -->
+    </div>
 </body>
 <?php include('../est/footer.php'); ?>

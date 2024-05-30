@@ -57,18 +57,21 @@
                 die($e->getMessage());
             }
         }
-        /*public function Actualizar(Local $data){
+        public function ActualizarCliente(Local $data){
             try {
-                $stm = "UPDATE cetpagolocal SET denominacion = ?, direccion = ? WHERE id = ?";
+                $stm = "UPDATE clientes SET pwd = ?, nombre = ?, apellido = ?, telefono = ?, correo = ?  WHERE dni = ?";
                 $this->pdo->prepare($stm)->execute(array(
-                    $data->__GET('denominacion'),
-                    $data->__GET('direccion'),
-                    $data->__GET('id')
+                    $data->__GET('pwd'),
+                    $data->__GET('nombre'),
+                    $data->__GET('apellido'),
+                    $data->__GET('telefono'),
+                    $data->__GET('correo'),
+                    $data->__GET('dni')
                 ));
             } catch (Exception $e) {
                 die($e->getMessage());
             }
-        }*/
+        }
 
         public function buscarPelicula(){
             try {

@@ -18,9 +18,9 @@
             <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item"><a class="nav-link" href="inicio.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link active disabled" href="datoscliente.php">Mis Datos</a></li>
+                <li class="nav-item"><a class="nav-link" href="peliculas.php">Peliculas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Salas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Boletos</a></li>
-                <li class="nav-item"><a class="nav-link" href="peliculas.php">Peliculas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
             </ul>
             </div>
@@ -29,7 +29,7 @@
     
     <div class="container-fluid d-flex justify-content-between align-items-end" >
         <div style="font-size:2rem">Mis datos personales</div>
-        <a class="btn btn-info" href="#">Editar perfil</a>
+        <a class="btn btn-primary" href="editardatos.php">Editar perfil</a>
     </div>
     <div class="container-fluid d-flex justify-content-center">
         <div class="bg-white p-5 rounded-5 text-secondary" style="width:50rem">
