@@ -35,13 +35,13 @@
         <div style="font-size:2rem">Salas</div>
     </div>
     <div class="container-fluid d-flex">
-        <div class="align-items-center d-flex justify-content-center">Asiento Vacio</div><div class='p-3 m-1 btn btn-outline-primary disabled'>AA</div>
-        <div class="align-items-center d-flex justify-content-center">Asiento Ocupado</div><div class='p-3 m-1 btn btn-outline-primary active'>AA</div>
+        <div class="align-items-center d-flex justify-content-center">Asiento Vacio</div><div class='p-2 mb-3 ms-2 btn btn-outline-primary disabled'>AA</div>
+        <div class="align-items-center d-flex justify-content-center">Asiento Ocupado</div><div class='p-2 mb-3 ms-2s btn btn-outline-primary active'>AA</div>
     </div>
-    <div class="container-fluid vw-100">
-        <div class="container-fluid text-center">
-            <div class="bg-info vw-75" style="width:50rem" >Pantalla</div>
-            <table>
+    <div class="container-fluid">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+    <div class="bg-info vw-75 mb-4" style="width:50rem">Pantalla</div>
+    <table class="table-auto">
                 <tbody>
                     <?php
                     $capacidadSala = 100;
@@ -55,7 +55,7 @@
                             $label = $letras[$col - 1] . $fila;
 
                             if ($number <= $capacidadSala) {
-                                echo "<td class='p-3 m-1 btn btn-outline-primary'>$label</td>";
+                                echo "<td id='$label' class='p-2 mb-3 ms-2 btn btn-outline-primary seat-button'>$label</td>";
                             } else {
                                 echo '<td></td>';
                             }
@@ -64,6 +64,37 @@
                     }
                     ?>
                 </tbody>
+                <script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const buttons = document.querySelectorAll('.seat-button');
+    
+    // Load the state from localStorage
+    buttons.forEach(button => {
+        const label = button.id;
+        if (localStorage.getItem(label) === 'selected') {
+            button.classList.remove('btn-outline-primary');
+            button.classList.add('btn-primary');
+        }
+    });
+
+    // Add click event listeners to toggle the state
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const label = button.id;
+            if (button.classList.contains('btn-outline-primary')) {
+                button.classList.remove('btn-outline-primary');
+                button.classList.add('btn-primary');
+                localStorage.setItem(label, 'selected');
+            } else {
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-outline-primary');
+                localStorage.removeItem(label);
+            }
+        });
+    });
+});
+</script>
+
             </table>
         </div>
     </div>
