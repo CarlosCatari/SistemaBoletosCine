@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2024 a las 17:36:00
+-- Tiempo de generación: 05-06-2024 a las 17:41:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -52,6 +52,26 @@ INSERT INTO `clientes` (`idcliente`, `dni`, `pwd`, `nombre`, `apellido`, `telefo
 (8, '84401564', 'pesauji', 'Pedro Saul', 'Sánchez Jiménez', '954987123', 'pedro.sanchez@gmail.com'),
 (9, '81401565', 'matines45', 'Elena', 'Martín López', '954654987', 'elena.martin@gmail.com'),
 (10, '71601566', 'castrojorgue2', 'Jorge Ernesto', 'Herrera Castro', '954321456', 'jorge.herrera@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `horario`
+--
+
+CREATE TABLE `horario` (
+  `idhorario` int(11) NOT NULL,
+  `turno` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `horario`
+--
+
+INSERT INTO `horario` (`idhorario`, `turno`) VALUES
+(1, '03:30:00'),
+(2, '06:30:00'),
+(3, '09:30:00');
 
 -- --------------------------------------------------------
 
@@ -115,6 +135,12 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`idcliente`);
 
 --
+-- Indices de la tabla `horario`
+--
+ALTER TABLE `horario`
+  ADD PRIMARY KEY (`idhorario`);
+
+--
 -- Indices de la tabla `pelicula`
 --
 ALTER TABLE `pelicula`
@@ -135,6 +161,12 @@ ALTER TABLE `personal`
 --
 ALTER TABLE `clientes`
   MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `horario`
+--
+ALTER TABLE `horario`
+  MODIFY `idhorario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pelicula`

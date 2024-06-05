@@ -42,12 +42,12 @@
             <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
                 <div>
                     <h5 class="card-title"><?php echo $r->__get('nombrepelicula'); ?></h5>
-                    
                 </div>
                 <div class="mt-auto">
                     <p class="card-text"><?php echo $r->__get('sinopsis'); ?></p>
                     <p class="card-text"><small><?php echo $r->__get('director'); ?></small></p>
-                    <a href="salas.php" class="btn btn-primary">Comprar</a>
+                    <a href="salas.php" class="btn btn-primary mb-1">Comprar Sala 2D</a>
+                    <a href="#" class="btn btn-primary">Comprar Sala 3D</a>
                 </div>
             </div>
         </div>

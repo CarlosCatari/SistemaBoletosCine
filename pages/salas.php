@@ -24,24 +24,25 @@
                 <li class="nav-item"><a class="nav-link" href="#">Boletos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
             </ul>
-            <form class="d-flex" role="search">
+            <!--  <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Buscar pelicula" aria-label="Search">
                 <button class="btn btn-primary" type="submit">Buscar</button>
-            </form>
+            </form> -->
             </div>
         </div>
     </nav>
-    <div class="container-fluid" >
-        <div style="font-size:2rem">Salas</div>
+    <div class="container-fluid d-flex justify-content-between" >
+        <div style="font-size:2rem">Sala 2D</div>
+        <div id="timer" style="font-size:2rem" class="px-5">05:00</div>
     </div>
     <div class="container-fluid d-flex">
-        <div class="align-items-center d-flex justify-content-center">Asiento Vacio</div><div class='p-2 mb-3 ms-2 btn btn-outline-primary disabled'>AA</div>
-        <div class="align-items-center d-flex justify-content-center">Asiento Ocupado</div><div class='p-2 mb-3 ms-2s btn btn-outline-primary active'>AA</div>
+        <div class="align-items-center d-flex justify-content-center px-3">Asiento Vacio</div><div class='p-2 mb-3 ms-2 btn btn-outline-primary disabled'>AA</div>
+        <div class="align-items-center d-flex justify-content-center px-3">Asiento Ocupado</div><div class='p-2 mb-3 ms-2s btn btn-outline-primary active'>AA</div>
     </div>
     <div class="container-fluid">
-    <div class="container-fluid text-center d-flex flex-column align-items-center">
-    <div class="bg-info vw-75 mb-4" style="width:50rem">Pantalla</div>
-    <table class="table-auto">
+        <div class="container-fluid text-center d-flex flex-column align-items-center">
+            <div class="bg-info vw-75 mb-4" style="width:50rem">Pantalla</div>
+            <table class="table-auto">
                 <tbody>
                     <?php
                     $capacidadSala = 100;
@@ -64,40 +65,16 @@
                     }
                     ?>
                 </tbody>
-                <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const buttons = document.querySelectorAll('.seat-button');
-    
-    // Load the state from localStorage
-    buttons.forEach(button => {
-        const label = button.id;
-        if (localStorage.getItem(label) === 'selected') {
-            button.classList.remove('btn-outline-primary');
-            button.classList.add('btn-primary');
-        }
-    });
-
-    // Add click event listeners to toggle the state
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const label = button.id;
-            if (button.classList.contains('btn-outline-primary')) {
-                button.classList.remove('btn-outline-primary');
-                button.classList.add('btn-primary');
-                localStorage.setItem(label, 'selected');
-            } else {
-                button.classList.remove('btn-primary');
-                button.classList.add('btn-outline-primary');
-                localStorage.removeItem(label);
-            }
-        });
-    });
-});
-</script>
-
             </table>
         </div>
-    </div>
+        <div>Asientos escogidos:</div>
+        
+        <div>
+            <form action="boletos.php" method="post">
+                <input id="dato" name="dato" value="A1" style="width: 30px;"></input><br>
+                <input type="submit" value="Enviar" class="btn btn-primary">
+            </form>
+        </div>
 
 </body>
 <?php include('../est/footer.php'); ?>
