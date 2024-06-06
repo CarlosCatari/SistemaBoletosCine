@@ -94,5 +94,41 @@
                 die($e->getMessage());
             }
         }
+
+
+        public function listarhorario(){
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare('SELECT * FROM horario');
+                $stm->Execute();
+                foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
+                    $loc = new local();
+                    $loc->__Set('turno', $r->turno);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+
+        public function listardulceria(){
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare('SELECT * FROM dulceria');
+                $stm->Execute();
+                foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
+                    $loc = new local();
+                    $loc->__Set('tipo', $r->tipo);
+                    $loc->__Set('nombre', $r->nombre);
+                    $loc->__Set('descripcion', $r->descripcion);
+                    $loc->__Set('precio', $r->precio);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
     }
 ?>
