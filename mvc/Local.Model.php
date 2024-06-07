@@ -120,7 +120,7 @@
                 foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
                     $loc = new local();
                     $loc->__Set('tipo', $r->tipo);
-                    $loc->__Set('nombre', $r->nombre);
+                    $loc->__Set('producto', $r->producto);
                     $loc->__Set('descripcion', $r->descripcion);
                     $loc->__Set('precio', $r->precio);
                     $result[] = $loc;

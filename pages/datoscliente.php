@@ -1,7 +1,7 @@
 <?php
-    require_once "../conectar.php";
-    require_once "../Local.Model.php";
-    require_once "../Local.entidad.php";
+    require_once "../mvc/conectar.php";
+    require_once "../mvc/Local.Model.php";
+    require_once "../mvc/Local.entidad.php";
 
     $loc = new local();
     $model = new LocalModel();
@@ -16,7 +16,6 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">CineStar</a>
             <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
-                <li class="nav-item"><a class="nav-link" href="inicio.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link active disabled" href="datoscliente.php">Mis Datos</a></li>
                 <li class="nav-item"><a class="nav-link" href="peliculas.php">Peliculas</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Salas</a></li>

@@ -1,7 +1,7 @@
 <?php
-    require_once "../conectar.php";
-    require_once "../Local.Model.php";
-    require_once "../Local.entidad.php";
+    require_once "../mvc/conectar.php";
+    require_once "../mvc/Local.Model.php";
+    require_once "../mvc/Local.entidad.php";
     $loc = new Local();
     $model = new LocalModel();
 
