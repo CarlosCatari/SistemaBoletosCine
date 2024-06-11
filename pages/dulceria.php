@@ -34,24 +34,23 @@
         </div>
     </nav>
     <div class="container-fluid">
-    <div class="row">
-        <?php foreach ($model->listardulceria() as $r): ?>
-            <div class="col-md-3 mb-2">
-                <div class="card text-white text-center bg-info" style="width: 100%; height: 17rem;">
-                    <div class="mt-auto">
-                        <h5 class="card-title"><?php echo $r->__get('tipo'); ?></h5>
-                    </div>
-                    <div class="mt-auto">
-                        <p class="card-text"><?php echo $r->__get('producto'); ?></p>
-                        <p class="card-text"><?php echo $r->__get('descripcion'); ?></p>
-                        <p class="card-text">S/.<?php echo $r->__get('precio'); ?></p>
+        <div class="row">
+            <?php foreach ($model->listardulceria() as $r): ?>
+                <div class="col-md-3 mb-2">
+                    <div class="card text-white text-center bg-info" style="width: 100%; height: 17rem;">
+                        <div class="mt-auto">
+                            <h5 class="card-title"><?php echo $r->__get('tipo'); ?></h5>
+                        </div>
+                        <div class="mt-auto">
+                            <p class="card-text"><?php echo $r->__get('producto'); ?></p>
+                            <p class="card-text"><?php echo $r->__get('descripcion'); ?></p>
+                            <p class="card-text">S/.<?php echo $r->__get('precio'); ?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
-
 </div>
 
 <div class="bg-primary container-fluid">

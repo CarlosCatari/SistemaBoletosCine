@@ -32,28 +32,37 @@
             </div>
         </div>
     </nav>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Bienvenido, <?php echo $user ?>! </strong>Prepárate para disfrutar de una experiencia inolvidable.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="container-fluid" >
         <div style="font-size:2rem">Peliculas</div>
     </div>
 
     <div class="container-fluid d-flex">
-        <?php foreach ($model->buscarPelicula() as $r): ?>
+    <?php foreach ($model->buscarPelicula() as $r): ?>
         <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
             <img src="../images/fondo_peliculas.jpg" class="card-img" alt="imagenpelicula">
             <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
                 <div>
-                    <h5 class="card-title"><?php echo $r->__get('nombrepelicula'); ?></h5>
+                    <?php $nombrepelicula = $r->__get('nombrepelicula'); ?>
+                    <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
                 </div>
                 <div class="mt-auto">
                     <p class="card-text"><?php echo $r->__get('sinopsis'); ?></p>
                     <p class="card-text"><small><?php echo $r->__get('director'); ?></small></p>
-                    <a href="salas.php" class="btn btn-primary mb-1">Comprar Sala 2D</a>
+                    <form action="salas.php" method="POST">
+                        <input type="hidden" name="nombrepelicula" value="<?php echo $nombrepelicula; ?>">
+                        <button type="submit" class="btn btn-primary mb-1">Comprar Sala 2D</button>
+                    </form>
                     <a href="#" class="btn btn-primary">Comprar Sala 3D</a>
                 </div>
             </div>
         </div>
-        <?php endforeach;?>
-    </div>
+    <?php endforeach; ?>
+</div>
 
 
 </body>

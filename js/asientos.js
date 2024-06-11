@@ -1,27 +1,9 @@
+function seleccionarAsiento(label) {
+    var seat = document.getElementById(label);
+    seat.classList.toggle('active');
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const buttons = document.querySelectorAll('.seat-button');
+    var selectedSeats = document.querySelectorAll('.seat-button.active');
+    var selectedLabels = Array.from(selectedSeats).map(seat => seat.id);
 
-    buttons.forEach(button => {
-        const label = button.id;
-        if (localStorage.getItem(label) === 'selected') {
-            button.classList.remove('btn-outline-primary');
-            button.classList.add('btn-primary');
-        }
-    });
-
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const label = button.id;
-            if (button.classList.contains('btn-outline-primary')) {
-                button.classList.remove('btn-outline-primary');
-                button.classList.add('btn-primary');
-                localStorage.setItem(label, 'selected');
-            } else {
-                button.classList.remove('btn-primary');
-                button.classList.add('btn-outline-primary');
-                localStorage.removeItem(label);
-            }
-        });
-    });
-});
+    document.getElementById('butacas-seleccionadas').innerText = selectedLabels.join(', ');
+}

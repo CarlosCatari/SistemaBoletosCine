@@ -9,6 +9,7 @@
 ?>
 
 
+
 <body class="justify-content-center align-items-center vh-100">
     <nav class="navbar navbar-expand-lg bg-body">
         <div class="container-fluid">
@@ -67,7 +68,6 @@
             
         </div>
     </form>
-
     <?php
         if(isset($_POST["dniuser"])) {
             $dni = $_POST['dniuser'];
@@ -87,7 +87,7 @@
             
             $model->ActualizarCliente($data);
             echo "Datos modificados correctamente correctamente.";
-            header('Location: inicio.php');
+            header('Location: loguin.php');
             exit;
         }
     ?>

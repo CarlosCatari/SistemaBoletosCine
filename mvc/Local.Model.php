@@ -80,6 +80,7 @@
                 $stm->Execute();
                 foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
                     $loc = new local();
+                    $loc->__Set('idpelicula', $r->idpelicula);
                     $loc->__Set('nombrepelicula', $r->nombrepelicula);
                     $loc->__Set('sinopsis', $r->sinopsis);
                     $loc->__Set('director', $r->director);
@@ -123,6 +124,25 @@
                     $loc->__Set('producto', $r->producto);
                     $loc->__Set('descripcion', $r->descripcion);
                     $loc->__Set('precio', $r->precio);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+
+        public function listarboleto(){
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare('SELECT * FROM boleto');
+                $stm->Execute();
+                foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
+                    $loc = new local();
+                    $loc->__Set('idboleto', $r->idboleto);
+                    $loc->__Set('tipoboleto', $r->tipoboleto);
+                    $loc->__Set('descripcionboleto', $r->descripcionboleto);
+                    $loc->__Set('precioboleto', $r->precioboleto);
                     $result[] = $loc;
                 }
                 return $result;

@@ -90,3 +90,16 @@ INSERT INTO dulceria (tipo, producto, descripcion, precio) VALUES
 ('Canchita', 'Canchita Mediana', 'Para calmar tu antojo de Canchita (salada)', '15'),
 ('Bebidas', 'Bebida Grande', 'Refréscate con 32 oz de tu bebida favorita *Sabor gaseosa.', '15'),
 ('Bebidas', 'Agua San Luis', 'Sin gas. Botella 750ml', '5');
+
+
+CREATE TABLE `boleto` (
+    `idboleto` int NOT NULL AUTO_INCREMENT,
+    `tipoboleto` varchar(30) NOT NULL,
+    `descripcionboleto` longtext,
+    `precioboleto` float NOT NULL,
+    PRIMARY KEY (`idboleto`)
+);
+INSERT INTO boleto (tipoboleto, descripcionboleto, precioboleto) VALUES 
+('General 2D','','23.50'),
+('Mayores 2D','Para mayores de 60 años','20.50'),
+('Niños 2D','Para niños de 2 a 11 años','20.00');
