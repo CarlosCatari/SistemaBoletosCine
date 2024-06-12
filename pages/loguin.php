@@ -73,7 +73,7 @@
         <button type="submit" class="btn btn-primary text-white w-100 mt-4">Ingresar</button>
         <div class="d-flex gap-1 justify-content-center mt-1">
             <div>¿No tienes usuario y contraseña?</div>
-            <a class="text-decoration-none text-primary fw-semibold" href="pages/registro.php">Registrar</a>
+            <a class="text-decoration-none text-primary fw-semibold" href="registro.php">Registrar</a>
         </div>
     </div>
     </form>

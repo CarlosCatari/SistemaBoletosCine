@@ -69,7 +69,7 @@ CREATE TABLE horario(
     idhorario int auto_increment primary key not null,
     turno time
 );
-INSERT INTO horarios (turno) values 
+INSERT INTO horario (turno) values 
     ('03:30'),
     ('06:30'),
     ('09:30');

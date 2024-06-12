@@ -1,7 +1,7 @@
 <?php
-    require_once "../conectar.php";
-    require_once "../Local.Model.php";
-    require_once "../Local.entidad.php";
+    require_once "../mvc/conectar.php";
+    require_once "../mvc/Local.Model.php";
+    require_once "../mvc/Local.entidad.php";
     $model = new LocalModel();
     $mensaje = '';
 
@@ -37,7 +37,7 @@
         <div class="bg-white p-5 rounded-5 text-secondary" style="width:50rem">
             <div class="d-flex justify-content-between align-items-end mb-3" >
                 <div style="font-size:2rem">Registro</div>
-                <a class="text-decoration-none text-primary fw-semibold display-6" href="../loguin.php">X</a>
+                <a class="text-decoration-none text-primary fw-semibold display-6" href="loguin.php">X</a>
             </div>
             <div class="d-flex justify-content-evenly align-items-center mb-3">
                 <div style="width:20rem">

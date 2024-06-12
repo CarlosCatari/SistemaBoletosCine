@@ -6,6 +6,8 @@
     $model = new LocalModel();
 
     include('../est/header.php');
+    session_start();
+    $user = $_SESSION['dni'];
 ?>
 
 
@@ -26,6 +28,7 @@
         </div>
     </nav>
 
+    <div class="container-fluid d-flex justify-content-center">
     <form action="editardatos.php" method="post">
         <div class="bg-white p-5 rounded-5 text-secondary" style="width:50rem">
             <div class="d-flex justify-content-between align-items-end mb-3" >
@@ -35,7 +38,7 @@
             <div class="d-flex justify-content-evenly align-items-center mb-3">
                 <div style="width:20rem">
                     <label for="document" class="form-label">Documento de identidad:</label>
-                    <input class="form-control" name="dniuser" type="text" id="document" placeholder="Nº de documento" required>
+                    <input class="form-control" value="<?php echo $user; ?>" name="dniuser" type="text" id="document" placeholder="Nº de documento" required>
                 </div>
                 <div style="width:20rem">
                     <label for="password" class="form-label">Contraseña:</label>
@@ -68,6 +71,7 @@
             
         </div>
     </form>
+    </div>
     <?php
         if(isset($_POST["dniuser"])) {
             $dni = $_POST['dniuser'];
@@ -87,8 +91,6 @@
             
             $model->ActualizarCliente($data);
             echo "Datos modificados correctamente correctamente.";
-            header('Location: loguin.php');
-            exit;
         }
     ?>
 </body>
