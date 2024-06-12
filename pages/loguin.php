@@ -6,9 +6,7 @@
     $model = new LocalModel();
     
     session_start();
-    if (!isset($_SESSION['contador'])) {
-        $_SESSION['contador'] = 0;
-    }
+    $_SESSION['contador'] = 0;
     $error = '';
     
     if(isset($_POST["username"])) {

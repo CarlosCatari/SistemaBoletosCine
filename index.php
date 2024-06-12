@@ -8,19 +8,17 @@
     include('est/header.php'); 
 ?>
 
-
-
 <body>
     <nav class="navbar navbar-expand-lg bg-body">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">CineStar</a>
             <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item"><a class="nav-link" href="index.php">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Peliculas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Salas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Boletos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Dulceria</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/notfound.php">Peliculas</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/notfound.php">Salas</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/notfound.php">Boletos</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/notfound.php">Dulceria</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/notfound.php">Blog</a></li>
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Buscar pelicula" aria-label="Search">
@@ -50,8 +48,8 @@
                 <div class="mt-auto">
                     <p class="card-text"><?php echo $r->__get('sinopsis'); ?></p>
                     <p class="card-text"><small><?php echo $r->__get('director'); ?></small></p>
-                    <a href="#" class="btn btn-primary mb-1">Comprar Sala 2D</a>
-                    <a href="#" class="btn btn-primary">Comprar Sala 3D</a>
+                    <a href="pages/notfound.php" class="btn btn-primary mb-1">Comprar Sala 2D</a>
+                    <a href="pages/notfound.php" class="btn btn-primary">Comprar Sala 3D</a>
                 </div>
             </div>
         </div>

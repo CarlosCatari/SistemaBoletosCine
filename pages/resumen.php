@@ -63,5 +63,6 @@
             <a href="#" class="btn btn-primary">Inicio</a>
         </div>
     </div>
+
 </body>
-</html>
+<?php include('../est/footer.php'); ?>
