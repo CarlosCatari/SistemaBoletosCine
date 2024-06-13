@@ -13,21 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     counters.forEach(counterContainer => {
-        let counter = 0;
+        let contador = 0;
         const counterValue = counterContainer.querySelector('.label1');
         const incrementButton = counterContainer.querySelector('.increment1');
         const decrementButton = counterContainer.querySelector('.decrement1');
 
         incrementButton.addEventListener('click', () => {
-            counter++;
-            counterValue.textContent = counter;
+            contador++;
+            counterValue.textContent = contador;
             updatecontadorboleto();
         });
 
         decrementButton.addEventListener('click', () => {
-            if (counter > 0) {
-                counter--;
-                counterValue.textContent = counter;
+            if (contador > 0) {
+                contador--;
+                counterValue.textContent = contador;
                 updatecontadorboleto();
             }
         });

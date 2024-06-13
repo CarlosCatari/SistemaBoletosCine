@@ -61,11 +61,10 @@
             </div>
 
             <script src="../js/asientos.js"></script>
-            <?php $butacaselect = "A1"; ?>
             <form action="resumen.php" method="POST">
                 <div>
                     <img class="pb-2" src="../icons/butaca.png" alt="butaca" style="width: 25px;">
-                    <input type="hidden" name="butacaselect" value="<?php echo $butacaselect; ?>">
+                    <input type="hidden" name="butacaselect" id="butacaselect" value="">
                     <span id="butacas-seleccionadas">Butacas seleccionadas</span>
                 </div>
                 <div>
@@ -81,6 +80,11 @@
                     <input type="submit" value="Ver resumen de compra" class="btn btn-primary mt-3">
                 </div>
             </form>
+
+            
+<script>
+
+</script>
         </div>
 
 
