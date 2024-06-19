@@ -38,18 +38,27 @@
 
     <div class="h1">Cartelera</div>
     <div class="container-fluid d-flex">
-        <?php foreach ($model->buscarPelicula() as $r): ?>
+        <?php 
+            foreach ($model->listarPelicula() as $r):
+                $nombrepelicula = $r->__get('nombrepelicula');
+                $urlpelicula = $r->__get('imagen');
+                    if (empty($urlpelicula)) {
+                        $urlpelicula = 'images/fondo_peliculas.jpg';
+                    }
+                $sipnopsis = $r->__get('sinopsis');
+                $director = $r->__get('director');
+        ?>
+
         <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
-            <img src="images/fondo_peliculas.jpg" class="card-img" alt="imagenpelicula">
+            <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
             <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
                 <div>
-                    <h5 class="card-title"><?php echo $r->__get('nombrepelicula'); ?></h5>
+                    <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
                 </div>
                 <div class="mt-auto">
-                    <p class="card-text"><?php echo $r->__get('sinopsis'); ?></p>
-                    <p class="card-text"><small><?php echo $r->__get('director'); ?></small></p>
+                    <p class="card-text"><?php echo $sipnopsis; ?></p>
+                    <p class="card-text"><small><?php echo $director; ?></small></p>
                     <a href="pages/notfound.php" class="btn btn-primary mb-1">Comprar Sala 2D</a>
-                    <a href="pages/notfound.php" class="btn btn-primary">Comprar Sala 3D</a>
                 </div>
             </div>
         </div>

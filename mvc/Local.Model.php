@@ -73,7 +73,7 @@
             }
         }
 
-        public function buscarPelicula(){
+        public function listarPelicula(){
             try {
                 $result = array();
                 $stm = $this->pdo->prepare('SELECT * FROM pelicula');
@@ -88,6 +88,31 @@
                     $loc->__Set('idioma', $r->idioma);
                     $loc->__Set('fechaestreno', $r->fechaestreno);
                     $loc->__Set('duracion', $r->duracion);
+                    $loc->__Set('imagen', $r->imagen);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+
+        public function buscarPelicula($idpelicula){
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare( 'SELECT * FROM pelicula WHERE idpelicula = '.$idpelicula);
+                $stm->Execute();
+                foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
+                    $loc = new local();
+                    $loc->__Set('idpelicula', $r->idpelicula);
+                    $loc->__Set('nombrepelicula', $r->nombrepelicula);
+                    $loc->__Set('sinopsis', $r->sinopsis);
+                    $loc->__Set('director', $r->director);
+                    $loc->__Set('genero', $r->genero);
+                    $loc->__Set('idioma', $r->idioma);
+                    $loc->__Set('fechaestreno', $r->fechaestreno);
+                    $loc->__Set('duracion', $r->duracion);
+                    $loc->__Set('imagen', $r->imagen);
                     $result[] = $loc;
                 }
                 return $result;

@@ -10,6 +10,11 @@
     session_start();
     $user = $_SESSION['username'];
     $dniuser = $_SESSION['dni'];
+
+    if (isset($_POST['idpelicula'])) {
+        $idpelicula = $_POST['idpelicula'];
+    }
+
 ?>
 <body>
     <nav class="navbar navbar-expand-lg bg-body">
@@ -33,17 +38,13 @@
         </div>
     </nav>
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Bienvenido, <?php echo $user ?>! </strong>Prepárate para disfrutar de una experiencia inolvidable.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
     <div class="container-fluid" >
-        <div style="font-size:2rem">Peliculas</div>
+        <div style="font-size:2rem">Detalle Peliculas</div>
     </div>
 
     <div class="container-fluid d-flex">
-        <?php 
-            foreach ($model->listarPelicula() as $r):
+        <?php
+            foreach ($model-> buscarPelicula($idpelicula) as $r):
                 $idpelicula = $r->__get('idpelicula');
                 $nombrepelicula = $r->__get('nombrepelicula');
                 $urlpelicula = "../".$r->__get('imagen');
@@ -54,25 +55,23 @@
                 $director = $r->__get('director');
         ?>
 
-        <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
-            <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
-            <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
-                <div>
-                    <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
-                </div>
-                <div>
+        <div>
+            <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
+        </div>
+        <div class="mt-auto">
+                    <p class="card-text"><?php echo $sipnopsis; ?></p>
+                    <p class="card-text"><small><?php echo $director; ?></small></p>
                     <form action="salas.php" method="POST">
                         <input type="hidden" name="nombrepelicula" value="<?php echo $nombrepelicula; ?>">
-                        <button type="submit" class="btn btn-primary mb-1">+ Comprar</button>
+                        <button type="submit" class="btn btn-primary mb-1">Comprar Sala 2D</button>
                     </form>
-                    <form action="detallepelicula.php" method="POST">
-                        <input type="hidden" name="idpelicula" value="<?php echo $idpelicula; ?>">
-                        <button type="submit" class="btn btn-primary mb-1">+ Detalles</button>
-                    </form>
-                </div>
-            </div>
         </div>
-    <?php endforeach; ?>
+
+        <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
+            <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
+            <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+        </div>
+        <?php endforeach; ?>
     </div>
 
 
