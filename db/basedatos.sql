@@ -59,11 +59,13 @@ CREATE TABLE pelicula (
     genero VARCHAR(20) NOT NULL,
     idioma VARCHAR(30) NOT NULL,
     fechaestreno DATE NOT NULL,
-    duracion TIME NOT NULL
+    duracion TIME NOT NULL,
+    imagen VARCHAR(255)
 );
-INSERT INTO pelicula (nombrepelicula, sinopsis, director, genero, idioma, fechaestreno, duracion) VALUES
-('Planeta de los Simios', 'Muchos años después del reinado de César, un joven simio emprende un viaje que lo llevará a cuestionar todo lo que le han enseñado sobre el pasado y a tomar decisiones que definirán el futuro tanto para los simios como para los humanos.', '-', 'Acción', 'Español', '2024-05-09', '01:30:00'),
-('Amigos imaginarios', 'Sigue a una niña que pasa por una experiencia difícil y entonces empieza a ver a los amigos imaginarios de todo el mundo que se han quedado atrás cuando sus amigos de la vida real han crecido.', '-', 'Familiar', 'Español', '2024-05-16', '01:50:00');
+INSERT INTO pelicula (nombrepelicula, sinopsis, director, genero, idioma, fechaestreno, duracion, imagen) VALUES
+('Planeta de los Simios', 'Muchos años después del reinado de César, un joven simio emprende un viaje que lo llevará a cuestionar todo lo que le han enseñado sobre el pasado y a tomar decisiones que definirán el futuro tanto para los simios como para los humanos.', '-', 'Acción', 'Español', '2024-05-09', '01:30:00', 'images\planeta_de_los_simios.jpg'),
+('Amigos imaginarios', 'Sigue a una niña que pasa por una experiencia difícil y entonces empieza a ver a los amigos imaginarios de todo el mundo que se han quedado atrás cuando sus amigos de la vida real han crecido.', '-', 'Familiar', 'Español', '2024-05-16', '01:50:00', 'images\amigos_imaginarios.jpg'),
+('Inmaculada', 'Cecilia (Sydney Sweeney), una monja fervientemente devota, se aventura hacia un remoto convento en la campiña italiana en busca de la consagración espiritual. Sin embargo, lo que inicialmente prometía ser un encuentro espiritual se transforma en una oscura y aterradora pesadilla.', '-', 'Terror', 'Español', '2024-05-16', '01:30:00', 'images\inmaculada.jpg');
 
 CREATE TABLE horario(
     idhorario int auto_increment primary key not null,

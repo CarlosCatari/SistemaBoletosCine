@@ -38,10 +38,6 @@
         </div>
     </nav>
 
-    <div class="container-fluid" >
-        <div style="font-size:2rem">Detalle Peliculas</div>
-    </div>
-
     <div class="container-fluid d-flex">
         <?php
             foreach ($model-> buscarPelicula($idpelicula) as $r):
@@ -53,27 +49,40 @@
                     }
                 $sipnopsis = $r->__get('sinopsis');
                 $director = $r->__get('director');
-        ?>
+                $duracion = $r->__get('duracion');
+                $genero = $r->__get('genero');
 
+        ?>
         <div>
             <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
+            <p><?php echo $genero.' | '. $duracion ?></p>
         </div>
-        <div class="mt-auto">
+        <div class="container text-center">
+        <div class="row align-items-center">
+            <div class="col">
+                    <p>Sinopsis</p>
                     <p class="card-text"><?php echo $sipnopsis; ?></p>
+                    <p>Director</p>
                     <p class="card-text"><small><?php echo $director; ?></small></p>
+
+
                     <form action="salas.php" method="POST">
                         <input type="hidden" name="nombrepelicula" value="<?php echo $nombrepelicula; ?>">
                         <button type="submit" class="btn btn-primary mb-1">Comprar Sala 2D</button>
                     </form>
+            </div>
+            <div class="col">
+                <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
+                <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
+                <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+                </div>
+            </div>
         </div>
-
-        <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
-            <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
-            <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);"></div>
         </div>
+        
         <?php endforeach; ?>
     </div>
 
-
+    
 </body>
 <?php include('../est/footer.php'); ?>

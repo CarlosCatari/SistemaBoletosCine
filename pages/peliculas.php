@@ -60,18 +60,21 @@
                 <div>
                     <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
                 </div>
-                <div>
-                    <form action="salas.php" method="POST">
+                <div class="my-auto">
+                    <form action="salas.php" method="POST" class="mb-1">
                         <input type="hidden" name="nombrepelicula" value="<?php echo $nombrepelicula; ?>">
-                        <button type="submit" class="btn btn-primary mb-1">+ Comprar</button>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 10rem;"><img class="mx-2" src="../icons/ticket.png" alt="boletos" style="width: 25px;">Comprar</button>
                     </form>
-                    <form action="detallepelicula.php" method="POST">
+                    <form action="detallepelicula.php" method="POST" class="mb-1">
                         <input type="hidden" name="idpelicula" value="<?php echo $idpelicula; ?>">
-                        <button type="submit" class="btn btn-primary mb-1">+ Detalles</button>
+                        <button type="submit" class="btn btn-primary" style="width: 10rem;"><img class="p-1 mx-2" src="../icons/signo+.png" alt="boletos" style="width: 25px;">Detalles</button>
                     </form>
                 </div>
             </div>
         </div>
+
+
     <?php endforeach; ?>
     </div>
 
