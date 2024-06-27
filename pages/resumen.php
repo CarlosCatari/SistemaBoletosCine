@@ -74,8 +74,15 @@
         </div>
         <hr>
         <div>
-            <p>Precio Total: S/00.00</p>
-        </div>
+                <?php   
+                    if (isset($_POST['precboleto'])) {
+                        $totalpago = $_POST['precboleto'];
+                        echo "<p>Total S/." . $totalpago . "</p>";
+                    } else {
+                        echo "<p>No se ha seleccionado ningun turno.</p>";
+                    }
+                ?>
+            </div>
     </div>
     </div>
 </body>

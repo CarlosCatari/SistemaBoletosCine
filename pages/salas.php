@@ -85,7 +85,8 @@
                     <span id="contadordulceria">Dulceria</span>
                 </div>
                 <div>
-                    <strong>Total:</strong> S/.<span id="contadorboleto">0</span>
+                    <strong>Total:</strong> S/.<span id="preciboletos">0</span>
+                    <input type="hidden" name="precboleto" id="precboleto">
                 </div>
                 <div>
                     <button onclick="copyLabelValue()" type="submit" class="btn btn-primary mt-3">Ver resumen de compra</button>
@@ -98,6 +99,9 @@
 
                     var labelValue2 = document.getElementById('horario').textContent;
                     document.getElementById('horarioselect').value = labelValue2;
+
+                    var labelValue3 = document.getElementById('preciboletos').textContent;
+                    document.getElementById('precboleto').value = labelValue3;
                 }
             </script>
         </div>
@@ -111,7 +115,7 @@
                 <a class="nav-link" id="section2-tab" data-toggle="tab" href="#section2" role="tab" aria-controls="section2" aria-selected="false">2. Entradas</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" id="section3-tab" data-toggle="tab" href="#section3" role="tab" aria-controls="section3" aria-selected="false">3. Dulceria</a>
+                <a onclick="copiarDatos()" class="nav-link" id="section3-tab" data-toggle="tab" href="#section3" role="tab" aria-controls="section3" aria-selected="false">3. Dulceria</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" id="section4-tab" data-toggle="tab" href="#section4" role="tab" aria-controls="section4" aria-selected="false">4. Pago</a>
@@ -174,9 +178,12 @@
                 </div>
 
                 
-                <div class="tab-pane fade" id="section2" role="tabpanel" aria-labelledby="section2-tab">
+                <div class="tab-pane fade " id="section2" role="tabpanel" aria-labelledby="section2-tab">
                     <div class="container mt-3">
                         <div class="row">
+
+
+                        
                             <div class="col-6">
                                 <div class="row w-100 d-flex align-items-center">
                                     <p class="fw-bold fs-4">Entradas Generales</p>
@@ -194,15 +201,28 @@
                                     <div class="col-6 d-flex align-items-center">
                                         <div class="mt-auto counter-container" id="contenedor1">
                                             <button class="btn btn-outline-primary mb-1 ms-2 rounded-circle button decrement1">-</button>
-                                            <span class="label1 mx-2 mt-4 fs-4" id="counterValue-<?php echo $r->__get('id'); ?>">0</span>
+                                            <span class="label1 mx-2 mt-4 fs-4" id="counterValue-<?php echo $idboleto; ?>">0</span>
                                             <button class="btn btn-outline-primary mb-1 rounded-circle button increment1">+</button>
-                                            <span class="mx-3">S/.<?php echo $r->__get('precioboleto'); ?></span>
+                                            <span class="mx-3" id="valueTicket-<?php echo $idboleto; ?>"><?php echo $precioboleto; ?></span>
                                         </div>
                                     </div>
                                     <?php endforeach; ?>
+                                    <script>
+                                        function copiarDatos() {
+                                            var ctd1 = document.getElementById('counterValue-1').textContent;
+                                            var pco1 = document.getElementById('valueTicket-1').textContent;
+                                            var ctd2 = document.getElementById('counterValue-2').textContent;
+                                            var pco2 = document.getElementById('valueTicket-2').textContent;
+                                            var ctd3 = document.getElementById('counterValue-3').textContent;
+                                            var pco3 = document.getElementById('valueTicket-3').textContent;
+
+                                            total = (ctd1 * pco1)+(ctd2 * pco2)+(ctd3 * pco3);
+                                            document.getElementById('preciboletos').textContent = total;
+                                        }
+                                    </script>
                                 </div>
                             </div>
-                            
+
                             <div class="col-6">
                                 <div class="row w-100 d-flex align-items-center">
                                     <p class="fw-bold fs-4">Descuentos</p>
