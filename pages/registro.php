@@ -42,27 +42,27 @@
             <div class="d-flex justify-content-evenly align-items-center mb-3">
                 <div style="width:20rem">
                     <label for="document" class="form-label">Documento de identidad:</label>
-                    <input class="form-control" name="dniuser" type="text" id="document" placeholder="Nº de documento" required>
+                    <input class="form-control" name="dniuser" type="text" id="document" placeholder="Nº de documento" pattern="[0-9]{8}" required>
                 </div>
                 <div style="width:20rem">
                     <label for="password" class="form-label">Contraseña:</label>
-                    <input class="form-control" name="password" type="password" id="password" placeholder="Contraseña" required>
+                    <input class="form-control" name="password" type="password" id="password" placeholder="Contraseña" pattern="[a-zA-Z0-9\s]+" required>
                 </div>
             </div>
             <div class="d-flex justify-content-evenly align-items-center mb-3">
                 <div style="width:20rem">
                     <label for="name" class="form-label">Nombre:</label>
-                    <input class="form-control" name="nameuser" type="text" id="name" placeholder="Nombre" required>
+                    <input class="form-control" name="nameuser" type="text" id="name" placeholder="Nombre" pattern="[a-zA-Z]+"  required>
                 </div>
                 <div style="width:20rem">
                     <label for="surname" class="form-label">Apellido:</label>
-                    <input class="form-control" name="surname" type="text" id="surname" placeholder="Apellido" required>
+                    <input class="form-control" name="surname" type="text" id="surname" placeholder="Apellido" pattern="[a-zA-Z]+"  required>
                 </div>
             </div>
             <div class="d-flex justify-content-evenly align-items-center mb-3">
                 <div style="width:20rem">
                     <label for="phone" class="form-label">Teléfono:</label>
-                    <input class="form-control" name="phone" type="tel" id="phone" placeholder="Teléfono" required>
+                    <input class="form-control" name="phone" type="tel" id="phone" placeholder="Teléfono" pattern="[0-9]{9}" required>
                 </div>
                 <div style="width:20rem">
                     <label for="email" class="form-label">Correo:</label>

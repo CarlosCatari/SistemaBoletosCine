@@ -9,7 +9,7 @@ function startTimer() {
 
         if (countdownTime <= 0) {
             clearInterval(timer);
-            document.getElementById('timer').innerHTML = "Time's up!";
+            window.location.href = "peliculas.php";
         }
         countdownTime--;
     }, 1000);

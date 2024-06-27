@@ -11,58 +11,72 @@
     session_start();
     $user = $_SESSION['dni'];
 ?>
-<body>
-    
-    <div class="container-fluid d-flex justify-content-between align-items-end" >
+<body class="bg-info">
+    <div class="container w-50 bg-white">
+    <div class="container-fluid d-flex">
         <div style="font-size:2rem">Resumen de compra</div>
+        <a href="#" class="btn btn-primary m-2">Imprimir</a>
+        <a href="peliculas.php" class="btn btn-primary m-2">Volver al Inicio</a>
     </div>
-    <div class="container-fluid d-flex justify-content-center">
-        <div class="bg-white p-5 rounded-5 text-secondary" style="width:50rem">
-            <?php foreach ($model -> listarUsuario($user) as $r): ?>
-            <div class="d-flex justify-content-evenly align-items-center mb-3">
+    <div class="container-fluid">
+        <div class="p-3">
+            <?php 
+                foreach ($model -> listarUsuario($user) as $r): 
+                    $dniuser = " ".$r->__get('dni');
+                    $nombrecompleto = " ".$r->__get('nombre')." ". $r->__get('apellido');
+                    $correo = " ".$r->__get('correo');
+                endforeach; 
+            ?>
+            <div class="mb-3">
                 <div style="width:20rem">
-                    <p>DNI:</p>
-                    <p><?php echo $r->__get('dni'); ?></p>
+                    <p>Datos Cliente:</p>
+                    <p>DNI:<?php echo $dniuser ?></p>
+                    <p>Nombre:<?php echo $nombrecompleto; ?></p>
+                    <p>Correo electrónico:<?php echo $correo; ?></p>
                 </div>
             </div>
-            <div class="d-flex justify-content-evenly align-items-center mb-3">
-                <div style="width:20rem">
-                    <p>Nombre:</p>
-                    <p><?php echo $r->__get('nombre')." ". $r->__get('apellido'); ?></p>                
-                </div>
+        </div>
+        <div class="p-3">
+            <div>
+                <p>Canje:</p>
+                <p>codigo canje:</p>
             </div>
-            <div class="d-flex justify-content-evenly align-items-center mb-3">
-                <div style="width:20rem">
-                    <p>Correo electrónico:</p>
-                    <p><?php echo $r->__get('correo'); ?></p>
-                </div>
-            </div>
-            <?php endforeach; ?>
-            <div class="d-flex justify-content-evenly align-items-center mb-3">
-                <div style="width:20rem">
-                    <p>Sala:</p>
-                    <p>2D</p>
-                </div>
-            </div>
-            
-            <div class="d-flex justify-content-evenly align-items-center mb-3">
-                <div style="width:20rem">
-                    <p>Butacas:</p>
-                    <?php
+        </div>
+        <div class="p-3">
+            <div>
+                <p>Resumen de compra</p>
+                <?php
                     if (isset($_POST['butacaselect'])) {
-                        $butacaselect = $_POST['butacaselect'];
-                        echo '<span>'.$butacaselect.'</span>';
+                        $butacas = $_POST['butacaselect'];
+                        echo "<p>Butacas seleccionadas: " . $butacas . "</p>";
+                    } else {
+                        echo "<p>No se ha seleccionado ninguna butaca.</p>";
                     }
-                    ?>
-                </div>
+                ?>
             </div>
-
+            <div>
+                <?php   
+                    if (isset($_POST['horarioselect'])) {
+                        $horario = $_POST['horarioselect'];
+                        echo "<p>Hora: " . $horario . "</p>";
+                    } else {
+                        echo "<p>No se ha seleccionado ningun turno.</p>";
+                    }
+                ?>
+            </div>
         </div>
-        <div class="container-fluid">
-            <a href="#" class="btn btn-primary">Imprimir</a>
-            <a href="#" class="btn btn-primary">Inicio</a>
+
+
+        <div class="p-3">
+            <div>
+                <p>Dulcería:</p>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <p>Precio Total: S/00.00</p>
         </div>
     </div>
-
+    </div>
 </body>
 <?php include('../est/footer.php'); ?>

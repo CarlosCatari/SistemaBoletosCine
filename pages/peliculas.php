@@ -62,8 +62,7 @@
                 </div>
                 <div class="my-auto">
                     <form action="salas.php" method="POST" class="mb-1">
-                        <input type="hidden" name="nombrepelicula" value="<?php echo $nombrepelicula; ?>">
-                        
+                        <input type="hidden" name="idpelicula" value="<?php echo $idpelicula; ?>">
                         <button type="submit" class="btn btn-primary" style="width: 10rem;"><img class="mx-2" src="../icons/ticket.png" alt="boletos" style="width: 25px;">Comprar</button>
                     </form>
                     <form action="detallepelicula.php" method="POST" class="mb-1">

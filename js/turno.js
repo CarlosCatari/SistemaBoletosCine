@@ -1,8 +1,7 @@
 function convertirTiempo(tiempo) {
     let [horas, minutos] = tiempo.split(':');
-    let periodo = 'PM';
     horas = parseInt(horas, 10);
-    return `${horas}:${minutos} ${periodo}`;
+    return horas + ':' + minutos;
 }
 
 function mostrarHorario(tiempo) {
