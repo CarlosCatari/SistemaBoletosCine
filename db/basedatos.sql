@@ -1,13 +1,13 @@
-CREATE TABLE personal (
-    idcliente INT AUTO_INCREMENT PRIMARY KEY,
-    dni VARCHAR(8) NOT NULL,
-    pwd VARCHAR(30) NOT NULL,
-    nombre VARCHAR(70) NOT NULL,
-    apellido VARCHAR(70) NOT NULL,
-    telefono VARCHAR(9),
-    correo VARCHAR(50)
+CREATE TABLE administrador (
+    idadmin INT AUTO_INCREMENT PRIMARY KEY,
+    dniadmin VARCHAR(8) NOT NULL,
+    pwdadmin VARCHAR(30) NOT NULL,
+    nombreadmin VARCHAR(70) NOT NULL,
+    apellidoadmin VARCHAR(70) NOT NULL,
+    telefonoadmin VARCHAR(9),
+    correoadmin VARCHAR(50)
 );
-INSERT INTO personal (dni, pwd, nombre, apellido, telefono, correo) VALUES
+INSERT INTO administrador (dniadmin, pwdadmin, nombreadmin, apellidoadmin, telefonoadmin, correoadmin) VALUES
 ('70401567','70401567', 'Lucía', 'Ramírez Ortega', '954147258', 'lucia.ramirez@corp.com'),
 ('70401568','70401568', 'Diego', 'Fernández Vargas', '954369852', 'diego.fernandez@corp.com'),
 ('70401569','70401569', 'Sara', 'Navarro Vega', '954789654', 'sara.navarro@corp.com');
@@ -34,22 +34,6 @@ INSERT INTO clientes (dni, pwd, nombre, apellido, telefono, correo) VALUES
 ('81401565','matines45', 'Elena', 'Martín López', '954654987', 'elena.martin@gmail.com'),
 ('71601566','castrojorgue2', 'Jorge Ernesto', 'Herrera Castro', '954321456', 'jorge.herrera@gmail.com');
 
-CREATE TABLE sala (
-    idsala INT AUTO_INCREMENT PRIMARY KEY,
-    tiposala VARCHAR(40) NOT NULL
-);
-INSERT INTO sala (tiposala) VALUES
-('REGULAR'),
-('2D'),
-('3D');
-
-CREATE TABLE idioma (
-    ididioma INT AUTO_INCREMENT PRIMARY KEY,
-    tipoidioma VARCHAR(40) NOT NULL
-);
-INSERT INTO idioma (tipoidioma) VALUES
-('SUBTITULADO'),
-('DOBLADA');
 
 CREATE TABLE pelicula (
     idpelicula INT AUTO_INCREMENT PRIMARY KEY,
@@ -67,6 +51,7 @@ INSERT INTO pelicula (nombrepelicula, sinopsis, director, genero, idioma, fechae
 ('Amigos imaginarios', 'Sigue a una niña que pasa por una experiencia difícil y entonces empieza a ver a los amigos imaginarios de todo el mundo que se han quedado atrás cuando sus amigos de la vida real han crecido.', '-', 'Familiar', 'Español', '2024-05-16', '01:50:00', 'images\amigos_imaginarios.jpg'),
 ('Inmaculada', 'Cecilia (Sydney Sweeney), una monja fervientemente devota, se aventura hacia un remoto convento en la campiña italiana en busca de la consagración espiritual. Sin embargo, lo que inicialmente prometía ser un encuentro espiritual se transforma en una oscura y aterradora pesadilla.', '-', 'Terror', 'Español', '2024-05-16', '01:30:00', 'images\inmaculada.jpg');
 
+
 CREATE TABLE horario(
     idhorario int auto_increment primary key not null,
     turno time
@@ -75,6 +60,7 @@ INSERT INTO horario (turno) values
     ('03:30'),
     ('06:30'),
     ('09:30');
+
 
 CREATE TABLE dulceria(
     iddulceria int auto_increment primary key not null,

@@ -32,7 +32,7 @@
     </div>
     <div class="container-fluid d-flex justify-content-center">
         <div class="bg-white p-5 rounded-5 text-secondary" style="width:50rem">
-            <?php foreach ($model -> listarUsuario($user) as $r): ?>
+            <?php foreach ($model -> buscarCliente($user) as $r): ?>
             <div class="d-flex justify-content-evenly align-items-center mb-3">
                 <div style="width:20rem">
                     <p>DNI:</p>

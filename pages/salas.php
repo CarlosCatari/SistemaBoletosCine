@@ -40,7 +40,7 @@
                 
                 foreach ($model-> buscarPelicula($idpelicula) as $r):
                     $nombrepelicula = $r->__get('nombrepelicula');
-                    $urlpelicula = "../".$r->__get('imagen');
+                    $urlpelicula = "../images/".$r->__get('imagen');
                         if (empty($urlpelicula)) {
                             $urlpelicula = 'images/fondopeliculapd.png';
                         }
@@ -240,29 +240,34 @@
 
                 <div class="tab-pane fade" id="section3" role="tabpanel" aria-labelledby="section3-tab">
                 <div class="container mt-3">
-                    <div class="row">
+                    <div class="container-fluid">
+                    <div class="d-flex flex-wrap">
                         <?php foreach ($model->listardulceria() as $r): ?>
-                        <div class="col-md-3 mb-2">
-                            <div class="card text-white text-center bg-info" style="width: 100%; height: 17rem;">
-                                <img src="../images/fondodulceria.png" class="card-img" alt="imagenpelicula">
-                                <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.7);">
-                                <div>
+                        <div class="card w-50">
+                            <div class="container-fluid text-center">
+                                <div class="row">
+                                <div class="col w-75">
                                     <h5 class="card-title"><?php echo $r->__get('tipo'); ?></h5>
                                     <p class="card-text"><?php echo $r->__get('producto'); ?></p>
                                     <p class="card-text"><?php echo $r->__get('descripcion'); ?></p>
-                                </div>
-                                <div class="mt-auto counter-container" id="contenedor2">
-                                    <button class="btn btn-outline-primary mb-1 ms-2 rounded-circle button decrement2">-</button>
+                                    <div class="mt-auto counter-container" id="contenedor2">
+                                    <button class="btn btn-outline-primary mb-3 ms-2 rounded-circle button decrement2">-</button>
                                     <span class="label2 fs-4" id="counterValue-<?php echo $r->__get('id'); ?>">0</span>
-                                    <button class="btn btn-outline-primary mb-1 rounded-circle button increment2">+</button>
-                                    <span class="mx-3 fs-4">S/.<?php echo $r->__get('precio'); ?></span>
+                                    <button class="btn btn-outline-primary mb-3 rounded-circle button increment2">+</button>
+                                    <span class="mx-3 fs-5">S/.<?php echo $r->__get('precio'); ?></span>
+                                    </div>
                                 </div>
+                                <div class="col ">
+                                    <img class="m-4" src="../images/fondodulceria.png" alt="imagenpelicula" style="height: 180px;">
+                                </div>
+
                                 </div>
                                 
                             </div>
                         </div>
                         <?php endforeach; ?>
                     </div>
+                </div>
                 </div>
                 <script src="../js/botonesdulceria.js"></script>
                 </div>
@@ -271,7 +276,7 @@
                 <div class="tab-pane fade" id="section4" role="tabpanel" aria-labelledby="section4-tab">
                 <div class="container mt-3">
                     <?php 
-                        foreach ($model -> listarUsuario($dniuser) as $r):
+                        foreach ($model -> buscarCliente($dniuser) as $r):
                             $dni = $r->__get('dni');
                             $nombrecompleto = $r->__get('nombre') ." ". $r->__get('apellido');;
                             $telefono = $r->__get('telefono');

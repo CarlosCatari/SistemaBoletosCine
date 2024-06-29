@@ -26,6 +26,9 @@
         public $tipoboleto;
         public $descripcionboleto;
         public $precioboleto;
+
+        public $idhorario;
+        public $turno;
         
 
         public function __get($k){

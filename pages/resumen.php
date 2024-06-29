@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="p-3">
             <?php 
-                foreach ($model -> listarUsuario($user) as $r): 
+                foreach ($model -> buscarCliente($user) as $r): 
                     $dniuser = " ".$r->__get('dni');
                     $nombrecompleto = " ".$r->__get('nombre')." ". $r->__get('apellido');
                     $correo = " ".$r->__get('correo');

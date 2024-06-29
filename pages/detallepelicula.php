@@ -50,7 +50,7 @@
             foreach ($model-> buscarPelicula($idpelicula) as $r):
                 $idpelicula = $r->__get('idpelicula');
                 $nombrepelicula = $r->__get('nombrepelicula');
-                $urlpelicula = "../".$r->__get('imagen');
+                $urlpelicula = "../images/".$r->__get('imagen');
                     if (empty($urlpelicula)) {
                         $urlpelicula = 'images/fondo_peliculas.jpg';
                     }

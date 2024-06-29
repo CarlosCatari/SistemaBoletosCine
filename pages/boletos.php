@@ -31,7 +31,7 @@
     </div>
     <div>
     <div class="bg-white p-5 rounded-5 text-secondary" style="width:50rem">
-            <?php foreach ($model -> listarUsuario($dniuser) as $r): ?>
+            <?php foreach ($model -> buscarCliente($dniuser) as $r): ?>
             <div class="d-flex justify-content-evenly align-items-center mb-3">
                 <div style="width:20rem">
                     <p>Nombre: <?php echo $r->__get('nombre') ." ".$r->__get('apellido'); ?></p>

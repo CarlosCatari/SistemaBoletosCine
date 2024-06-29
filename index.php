@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">CineStar</a>
+            <a class="navbar-brand" href="index.php">CineStar</a>
             <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item"><a class="nav-link" href="index.php">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="pages/notfound.php">Peliculas</a></li>
@@ -20,10 +20,6 @@
                 <li class="nav-item"><a class="nav-link" href="pages/notfound.php">Dulceria</a></li>
                 <li class="nav-item"><a class="nav-link" href="pages/notfound.php">Blog</a></li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar pelicula" aria-label="Search">
-                <button class="btn btn-primary" type="submit">Buscar</button>
-            </form>
             <ul class="nav nav-underline ">
                 <li class="nav-item ms-3"><a class="nav-link" href="pages/loguin.php"><img src="icons/usuario2.png" style="width: 40px;" alt="img_usuario"></a></li>
             </ul>
@@ -36,33 +32,5 @@
     </div>
 </div>
 
-    <div class="h1">Cartelera</div>
-    <div class="container-fluid d-flex">
-        <?php 
-            foreach ($model->listarPelicula() as $r):
-                $nombrepelicula = $r->__get('nombrepelicula');
-                $urlpelicula = $r->__get('imagen');
-                    if (empty($urlpelicula)) {
-                        $urlpelicula = 'images/fondo_peliculas.jpg';
-                    }
-                $sipnopsis = $r->__get('sinopsis');
-                $director = $r->__get('director');
-        ?>
-
-        <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
-            <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
-            <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
-                <div>
-                    <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
-                </div>
-                <div class="mt-auto">
-                    <p class="card-text"><?php echo $sipnopsis; ?></p>
-                    <p class="card-text"><small><?php echo $director; ?></small></p>
-                    <a href="pages/notfound.php" class="btn btn-primary mb-1">Comprar Sala 2D</a>
-                </div>
-            </div>
-        </div>
-        <?php endforeach;?>
-    </div>
 </body>
 <?php include('est/footer.php'); ?>

@@ -14,7 +14,7 @@
 
     if(isset($_POST["username"])) {
         $verificador = false;
-        foreach ($model->buscarUsuario($_REQUEST['username']) as $r) { 
+        foreach ($model->buscarCliente($_REQUEST['username']) as $r) { 
             $user = $_POST['username'];
             $pass = $_POST['password'];
             $dbuser = $r->__get('dni');

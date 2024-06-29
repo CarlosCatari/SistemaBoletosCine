@@ -21,7 +21,7 @@
         $data->__set('telefono', $telefono);
         $data->__set('correo', $correo);
 
-        $model->AgregarUsuario($data);
+        $model->AgregarCliente($data);
         $mensaje = $nombre. " has sido registrado correctamente";
     }
 
