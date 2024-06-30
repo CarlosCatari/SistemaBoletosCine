@@ -14,6 +14,7 @@
 
     if(isset($_POST["username"])) {
         $verificador = false;
+        $verificadoradmin = false;
         foreach ($model->buscarCliente($_REQUEST['username']) as $r) { 
             $user = $_POST['username'];
             $pass = $_POST['password'];
@@ -28,9 +29,25 @@
                 break;
             }
         }
+        foreach ($model->buscarAdmin($_REQUEST['username']) as $r) { 
+            $useradmin = $_POST['username'];
+            $passadmin = $_POST['password'];
+            $dbuseradmin = $r->__get('dniadmin');
+            $dbpwdadmin = $r->__get('pwdadmin');
+            $dbnombreadmin = $r->__get('nombreadmin');
+        
+            if ($useradmin === $dbuseradmin && $passadmin === $dbpwdadmin) {
+                $_SESSION['usernameadmin'] = $dbnombreadmin;
+                $_SESSION['dniadmin'] = $dbuser;
+                $verificadoradmin = true;
+                break;
+            }
+        }
         
         if ($verificador) {
             header('Location: peliculas.php');
+        } elseif($verificadoradmin){
+            header('Location: ../admin/dashboardadmin.php');
         } else {
             $_SESSION['contador']++;
             if ($_SESSION['contador'] < 4) {
@@ -60,7 +77,7 @@
                 <div class="input-group-text bg-primary">
                     <img src="../icons/username.png" alt="username" style="height:1rem">
                 </div>
-                <input class="form-control" name="username" type="text" placeholder="Nº de documento" pattern="[0-9]{8}" required>
+                <input class="form-control" name="username" type="text" placeholder="Nº de documento" pattern="[0-9]{8}" maxlength="8" required>
             </div>
             <div class="input-group mt-1">
                 <div class="input-group-text bg-primary">

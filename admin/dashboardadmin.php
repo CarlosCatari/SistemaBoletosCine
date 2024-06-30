@@ -8,6 +8,9 @@
 
     include('../est/header.php');
     session_start();
+
+    $user = $_SESSION['usernameadmin'];
+    $dniuser = $_SESSION['dniadmin'];
 ?>
 <body class="d-flex flex-column vh-100" style="background-image: url('../images/fondodashboard.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <nav class="navbar navbar-expand-lg bg-body position-relative" style="z-index: 1;">
@@ -15,10 +18,14 @@
             <a class="navbar-brand" href="dashboardadmin.php">Panel CineStar</a>
             <ul class="nav nav-underline me-auto mb-2 mb-lg-0"></ul>
             <ul class="nav nav-underline">
-                <li class="nav-item ms-3"><a class="nav-link" href="loguin.php">Cerrar Sesion</a></li>
+                <li class="nav-item ms-3"><a class="nav-link" href="../pages/loguin.php">Cerrar Sesion</a></li>
             </ul>
         </div>
     </nav>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Bienvenido, <?php echo $user ?>! </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="container">
         <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
             <div class="row">

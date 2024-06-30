@@ -84,6 +84,26 @@
                 die($e->getMessage());
             }
         }
+        public function buscarAdmin($dniadmin){
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare( 'SELECT * FROM administrador WHERE dniadmin = '.$dniadmin);
+                $stm->Execute();
+                foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
+                    $loc = new local();
+                    $loc->__Set('dniadmin', $r->dniadmin);
+                    $loc->__Set('pwdadmin', $r->pwdadmin);
+                    $loc->__Set('nombreadmin', $r->nombreadmin);
+                    $loc->__Set('apellidoadmin', $r->apellidoadmin);
+                    $loc->__Set('telefonoadmin', $r->telefonoadmin);
+                    $loc->__Set('correoadmin', $r->correoadmin);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
 
         public function buscarCliente($dni){
             try {

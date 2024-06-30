@@ -43,7 +43,7 @@
                 <li class="nav-item"><a class="nav-link active disabled" href="admhorario.php">Horario</a></li>
             </ul>
             <ul class="nav nav-underline ">
-                <li class="nav-item ms-3"><a class="nav-link" href="loguin.php">Cerrar Sesion</a></li>
+                <li class="nav-item ms-3"><a class="nav-link" href="../pages/loguin.php">Cerrar Sesion</a></li>
             </ul>
         </div>
     </nav>

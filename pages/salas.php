@@ -63,8 +63,9 @@
                 ?>
             </div>
             <script src="../js/turno.js"></script>
-
             <script src="../js/asientos.js"></script>
+
+
             <form action="resumen.php" method="POST">
                 <div> 
                     <img class="pb-2" src="../icons/reloj.png" alt="hora" style="width: 25px;">
@@ -78,18 +79,24 @@
                 </div>
                 <div>
                     <img class="pb-2" src="../icons/boletos.png" alt="boletos" style="width: 25px;">
-                    <span id="contadorboleto">Boletos</span>
-                </div>
-                <div>
-                    <img class="pb-2" src="../icons/dulceria.png" alt="dulceria" style="width: 25px;">
-                    <span id="contadordulceria">Dulceria</span>
-                </div>
-                <div>
-                    <strong>Total:</strong> S/.<span id="preciboletos">0</span>
+                    <span id="contadorboleto"></span>
+                    <span>Boletos - S/.</span>
+                    <span id="preciboletos"></span>
                     <input type="hidden" name="precboleto" id="precboleto">
                 </div>
                 <div>
-                    <button onclick="copyLabelValue()" type="submit" class="btn btn-primary mt-3">Ver resumen de compra</button>
+                    <img class="pb-2" src="../icons/dulceria.png" alt="dulceria" style="width: 25px;">
+                    <span id="contadordulceria"></span>
+                    <span>Productos - S/.</span>
+                    <span id="precioprd"></span>
+                    <input type="hidden" name="pcioprd" id="pcioprd">
+                </div>
+                <div>
+                    <strong>Total:</strong> S/.<span id="preciototal">0</span>
+                    <input type="hidden" name="pciototal" id="pciototal">
+                </div>
+                <div>
+                    <button onclick="copyLabelValue()"  type="submit" id="btnResumen" class="btn btn-primary mt-3" disabled>Ver resumen de compra</button>
                 </div>
             </form>
             <script>
@@ -102,6 +109,12 @@
 
                     var labelValue3 = document.getElementById('preciboletos').textContent;
                     document.getElementById('precboleto').value = labelValue3;
+
+                    var labelValue4 = document.getElementById('precioprd').textContent;
+                    document.getElementById('pcioprd').value = labelValue4;
+
+                    var labelValue5 = document.getElementById('preciototal').textContent;
+                    document.getElementById('pciototal').value = labelValue5;
                 }
             </script>
         </div>
@@ -112,13 +125,13 @@
                 <a class="nav-link active" id="section1-tab" data-toggle="tab" href="#section1" role="tab" aria-controls="section1" aria-selected="true">1. Selecciona tus butacas y turno</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" id="section2-tab" data-toggle="tab" href="#section2" role="tab" aria-controls="section2" aria-selected="false">2. Entradas</a>
+                <a onclick="limpiartotal()"class="nav-link" id="section2-tab" data-toggle="tab" href="#section2" role="tab" aria-controls="section2" aria-selected="false">2. Entradas</a>
                 </li>
                 <li class="nav-item">
-                <a onclick="copiarDatos()" class="nav-link" id="section3-tab" data-toggle="tab" href="#section3" role="tab" aria-controls="section3" aria-selected="false">3. Dulceria</a>
+                <a onclick="copiarDatos(); desmarcarRadios(); limpiartotal()" class="nav-link" id="section3-tab" data-toggle="tab" href="#section3" role="tab" aria-controls="section3" aria-selected="false">3. Dulceria</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" id="section4-tab" data-toggle="tab" href="#section4" role="tab" aria-controls="section4" aria-selected="false">4. Pago</a>
+                <a onclick="CalcularDatosBoletos(); copiarDatos(); desmarcarRadios()" class="nav-link" id="section4-tab" data-toggle="tab" href="#section4" role="tab" aria-controls="section4" aria-selected="false">4. Pago</a>
                 </li>
             </ul>
 
@@ -203,23 +216,24 @@
                                             <button class="btn btn-outline-primary mb-1 ms-2 rounded-circle button decrement1">-</button>
                                             <span class="label1 mx-2 mt-4 fs-4" id="counterValue-<?php echo $idboleto; ?>">0</span>
                                             <button class="btn btn-outline-primary mb-1 rounded-circle button increment1">+</button>
-                                            <span class="mx-3" id="valueTicket-<?php echo $idboleto; ?>"><?php echo $precioboleto; ?></span>
+                                            <span class="mx-3">S/.</span>
+                                            <span id="valueTicket-<?php echo $idboleto; ?>"><?php echo $precioboleto; ?></span>
                                         </div>
                                     </div>
                                     <?php endforeach; ?>
+                                    
                                     <script>
                                         function copiarDatos() {
-                                            var ctd1 = document.getElementById('counterValue-1').textContent;
-                                            var pco1 = document.getElementById('valueTicket-1').textContent;
-                                            var ctd2 = document.getElementById('counterValue-2').textContent;
-                                            var pco2 = document.getElementById('valueTicket-2').textContent;
-                                            var ctd3 = document.getElementById('counterValue-3').textContent;
-                                            var pco3 = document.getElementById('valueTicket-3').textContent;
-
-                                            total = (ctd1 * pco1)+(ctd2 * pco2)+(ctd3 * pco3);
-                                            document.getElementById('preciboletos').textContent = total;
+                                            let total = 0;
+                                            for (let i = 1; i <= <?php echo $idboleto; ?>; i++) {
+                                                let ctd = parseInt(document.getElementById(`counterValue-${i}`).textContent);
+                                                let pco = parseFloat(document.getElementById(`valueTicket-${i}`).textContent);
+                                                total += ctd * pco;
+                                            }
+                                            document.getElementById('preciboletos').textContent = total.toFixed(2);
                                         }
                                     </script>
+
                                 </div>
                             </div>
 
@@ -242,21 +256,28 @@
                 <div class="container mt-3">
                     <div class="container-fluid">
                     <div class="d-flex flex-wrap">
-                        <?php foreach ($model->listardulceria() as $r): ?>
+                        <?php foreach ($model->listardulceria() as $r):
+                            $iddulceria = $r->__get('iddulceria');
+                            $tipodulceria = $r->__get('tipo');
+                            $proddulceria = $r->__get('producto');
+                            $descripdulceria = $r->__get('descripcion');
+                            $preciodulceria = $r->__get('precio');
+                        ?>
                         <div class="card w-50">
                             <div class="container-fluid text-center">
                                 <div class="row">
                                 <div class="col w-75">
-                                    <h5 class="card-title"><?php echo $r->__get('tipo'); ?></h5>
-                                    <p class="card-text"><?php echo $r->__get('producto'); ?></p>
-                                    <p class="card-text"><?php echo $r->__get('descripcion'); ?></p>
-                                    <div class="mt-auto counter-container" id="contenedor2">
+                                    <h5 class="card-title"><?php echo $tipodulceria; ?></h5>
+                                    <p class="card-text"><?php echo $proddulceria; ?></p>
+                                    <p class="card-text"><?php echo $descripdulceria; ?></p>
+                                    <<div class="mt-auto counter-container" id="contenedor2">
                                     <button class="btn btn-outline-primary mb-3 ms-2 rounded-circle button decrement2">-</button>
-                                    <span class="label2 fs-4" id="counterValue-<?php echo $r->__get('id'); ?>">0</span>
+                                    <span class="label2 fs-4" id="valueAmount-<?php echo $iddulceria; ?>">0</span>
                                     <button class="btn btn-outline-primary mb-3 rounded-circle button increment2">+</button>
-                                    <span class="mx-3 fs-5">S/.<?php echo $r->__get('precio'); ?></span>
-                                    </div>
+                                    <span id="valuePrice-<?php echo $iddulceria; ?>" class="mx-3 fs-5"><?php echo $preciodulceria; ?></span>
+                    </div>
                                 </div>
+
                                 <div class="col ">
                                     <img class="m-4" src="../images/fondodulceria.png" alt="imagenpelicula" style="height: 180px;">
                                 </div>
@@ -266,6 +287,19 @@
                             </div>
                         </div>
                         <?php endforeach; ?>
+                        
+                        <script>
+                            function CalcularDatosBoletos(){
+                                let totaldulceria = 0;
+                                    for (let x = 1; x <= <?php echo $iddulceria; ?>; x++) {
+                                        let ctddulceria = parseInt(document.getElementById(`valueAmount-${x}`).textContent);
+                                        let pcodulceria = parseFloat(document.getElementById(`valuePrice-${x}`).textContent);
+                                        totaldulceria += ctddulceria * pcodulceria;
+                                    }
+                                document.getElementById('precioprd').textContent = totaldulceria.toFixed(2);
+                            }
+                        </script>
+
                     </div>
                 </div>
                 </div>
@@ -283,32 +317,32 @@
                             $correo = $r->__get('correo');
                         endforeach; 
                     ?>
-                    <div>Elige una forma de pago</div>
+                    <div>Enviaremos el resumen de compra y contancia de pago al siguente correo:</div>
                     <div>
                         <input class="border border-primary p-1 rounded-2 w-25" type="text" placeholder="Nombre completo" value="<?php echo $nombrecompleto; ?>">
                         <input class="border border-primary p-1 rounded-2 w-25" type="text" placeholder="Correo electrónico" value="<?php echo $correo; ?>">
                     </div>
                     <hr>
+                    <div class="h4">Elige una forma de pago</div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="opciones" id="opcion1" value="opcion1">
                         <label class="form-check-label" for="opcion1">Tarjeta de Crédito o Débito</label>
                     </div>
-                    
+                    <form id="paymentForm">
                     <div id="contenedor-tarjeta" class="mt-3">
                         <img src="../icons/visa.jpg" alt="visa" style="width: 50px;">
                         <img src="../icons/american.png" alt="visa" style="width: 50px;">
                         <img src="../icons/mastercard.png" alt="visa" style="width: 50px;"><br>
 
-                        <form action="#">
-                        <select class="border border-primary p-1 rounded-2 w-25" name="tipo" id="tipo">
-                        <option value="Tipo">Tipo de Tarjeta</option>
+                        <select class="border border-primary p-1 rounded-2 w-25" name="tipotj" id="tipotj" disabled>
+                            <option value="" disabled selected>Tipo de Tarjeta</option>
                             <option value="Crédito">Crédito</option>
                             <option value="Débito">Débito</option>
                         </select>
-                        <input class="border border-primary p-1 rounded-2  w-25" type="text" placeholder="Número de la tarjeta">
+                        <input id="numtarjeta" class="border border-primary p-1 rounded-2  w-25" type="text" placeholder="Número de la tarjeta" maxlength="16" minlength="16" pattern="\d{16}" required disabled>
                         
 
-                        <select class="border border-primary p-1 rounded-2 m-2 " name="Mes" id="Mes">
+                        <select class="border border-primary p-1 rounded-2 m-2 " name="mes" id="mes" required disabled>
                             <option value="Mes">Mes</option>
                             <option value="01">01</option>
                             <option value="01">02</option>
@@ -323,7 +357,7 @@
                             <option value="11">11</option>
                             <option value="12">12</option>
                         </select>
-                        <select class="border border-primary p-1 rounded-2 m-2 " name="anio" id="anio">
+                        <select class="border border-primary p-1 rounded-2 m-2 " name="anio" id="anio" required disabled>
                             <option value="Año">Año</option>
                             <option value="2024">2024</option>
                             <option value="2025">2025</option>
@@ -333,36 +367,64 @@
                             <option value="2029">2029</option>
                         </select>
                         
-                        <input class="border border-primary p-1 rounded-2 m-2 " type="text" placeholder="CVV"><br>
+                        <input id="numcvv" class="border border-primary p-1 rounded-2 m-2 " type="text" placeholder="CVV" maxlength="4" minlength="3" pattern="\d{4}" required disabled><br>
 
-                        <select class="border border-primary p-1 rounded-2 mt-2  w-25" name="tipodoc" id="tipodoc">
+                        <select class="border border-primary p-1 rounded-2 mt-2  w-25" name="tipodoc" id="tipodoc" disabled>
                             <option value="Tipo de Documento">Tipo de Documento</option>
                             <option value="DNI">DNI</option>
                             <option value="Otro">Otro</option>
                         </select>
-                        <input class="border border-primary p-1 rounded-2 mt-2 w-25" type="text" placeholder="Número de documento" id="numero-doc-tarjeta"><br>
-                        <span>Total a Pagar: S/. 00.00</span>
-                        <input class="btn btn-outline-primary m-2 disabled" type="submit" value="Pagar">
+                        <input class="border border-primary p-1 rounded-2 mt-2 w-25" type="text" placeholder="Número de documento" id="numero-doc-tarjeta" maxlength="9" pattern="\d{8}" required disabled><br>
+                        <span>Total a Pagar: S/.</span>
+                        <span id="preciototal2">00.00</span>
+                        <input onclick="activarResumen()" class="btn btn-outline-primary m-2" id="btnPagar" type="submit" value="Pagar" disabled>
                         </form>
                     </div>
-                        <hr>
+                    <script>
+                        function checkFormValidity() {
+                            const form = document.getElementById('paymentForm');
+                            const tipo = document.getElementById('tipotj').value;
+                            const numeroTarjeta = document.getElementById('numtarjeta').value;
+                            const mes = document.getElementById('mes').value;
+                            const anio = document.getElementById('anio').value;
+                            const cvv = document.getElementById('numcvv').value;
+                            const tipoDoc = document.getElementById('tipodoc').value;
+                            const numeroDoc = document.getElementById('numero-doc-tarjeta').value;
+
+                            const isValid = tipo && numeroTarjeta && !isNaN(mes) && !isNaN(anio) && cvv && tipoDoc && numeroDoc && form.checkValidity();
+                            document.getElementById('btnPagar').disabled = !isValid;
+                        }
+                        document.getElementById('paymentForm').addEventListener('input', checkFormValidity);
+                        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+                            event.preventDefault();
+                            alert('Pago realizado correctamente.');
+                        });
+                    </script>
+                    <script>
+                        function activarResumen() {
+                            const btnResumen = document.getElementById('btnResumen');
+                            btnResumen.disabled = false;
+                        }
+                    </script>
+
+                    <hr>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="opciones" id="opcion2" value="opcion2">
                         <label class="form-check-label" for="opcion2">Billetera Electrónica</label>
                     </div>
                     <div id="contenedor-billetera" class="mt-3">
-
-                        <select class="border border-primary p-1 rounded-2 w-25" name="tipodoc" id="tipodoc2">
+                        <select class="border border-primary p-1 rounded-2 w-25" name="tipodoc" id="tipodoc2" disabled>
                             <option value="Tipo de Documento">Tipo de Documento</option>
                             <option value="DNI">DNI</option>
                             <option value="DNI">Pasaporte</option>
                             <option value="Otro">Otro</option>
                         </select>
-                        <input class="border border-primary p-1 rounded-2 w-25" type="text" placeholder="Número de documento" id="numero-doc-billetera">
-                        <input class="border border-primary p-1 rounded-2 m-1 w-25" type="text" placeholder="Número de celular" id="numero-celular"><br>
+                        <input class="border border-primary p-1 rounded-2 w-25" type="text" placeholder="Número de documento" id="numero-doc-billetera" maxlength="8" pattern="\d{8}" disabled required>
+                        <input class="border border-primary p-1 rounded-2 m-1 w-25" type="text" placeholder="Número de celular" id="numero-celular" maxlength="9" pattern="\d{9}" disabled required><br>
                         <div class="row justify-content-start">
                         <div class="col-6 col-sm-3">
-                            <span>Total a Pagar: S/. 00.00</span>
+                            <span>Total a Pagar: S/.</span>
+                            <span id="preciototalyp">00.00</span>
                             <div id="ventana-esperando-pago" style="display: none;">
                                 <button class="btn btn-primary" type="button" disabled>
                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -387,6 +449,17 @@
                             window.dniUser = dni;
                             window.phoneUser = phone;
                         });
+                    </script>
+                    <script>
+                        function desmarcarRadios() {
+                            let radios = document.getElementsByName('opciones');
+                            for (let i = 0; i < radios.length; i++) {
+                                radios[i].checked = false;
+                            }
+                        }
+                        function limpiartotal() {
+                            document.getElementById('preciototal').textContent = "00.00";
+                        }
                     </script>
                     <script src="../js/billeteras.js"></script>
                     
