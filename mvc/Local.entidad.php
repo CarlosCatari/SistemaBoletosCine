@@ -1,5 +1,6 @@
 <?php
     class local{
+        private $idcliente;
         private $dni;
         private $pwd;
         private $nombre;

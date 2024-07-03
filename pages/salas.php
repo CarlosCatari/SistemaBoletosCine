@@ -234,8 +234,7 @@
                                 <div class="row w-100 d-flex align-items-center">
                                     <p class="fw-bold fs-4">Descuentos</p>
                                     <div class="col">
-                                        <p>Codigo de canje:</p>
-                                        <input class="border border-primary p-1 rounded-2 w-50" type="text" placeholder="Ingrese codigo canje" pattern="[a-zA-Z0-9\s]+">
+                                        <p>Descuentos:</p>
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +250,7 @@
     function updateCounter(id, change) {
         let counter = document.getElementById(`counterValue-${id}`);
         let value = parseInt(counter.textContent) + change;
-        if (value < 0) value = 0; // Prevent negative values
+        if (value < 0) value = 0;
         counter.textContent = value;
 
         updateTotal();
@@ -332,13 +331,13 @@
                             $correo = $r->__get('correo');
                         endforeach; 
                     ?>
-                    <div>Enviaremos el resumen de compra y contancia de pago al siguente correo:</div>
+                    <div class="pb-1">Enviaremos el resumen de compra y contancia de pago al siguente correo:</div>
                     <div>
                         <input class="border border-primary p-1 rounded-2 w-25" type="text" placeholder="Nombre completo" value="<?php echo $nombrecompleto; ?>">
                         <input class="border border-primary p-1 rounded-2 w-25" type="text" placeholder="Correo electrónico" value="<?php echo $correo; ?>">
                     </div>
                     <hr>
-                    <div class="h4">Elige una forma de pago</div>
+                    <div class="h4">Elige una forma de pago:</div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="opciones" id="opcion1" value="opcion1">
                         <label class="form-check-label" for="opcion1">Tarjeta de Crédito o Débito</label>

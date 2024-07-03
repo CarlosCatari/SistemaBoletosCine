@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="preciodul">Precio</label>
-                    <input type="text" name="preciodul" class="form-control border-primary rounded-3" value="00:00" placeholder="Precio del producto en nuevos soles" maxlength="6" pattern="^([1-9][0-9]{0,2})(\.[0-9]{1,2})?$" required>
+                    <input type="text" name="preciodul" class="form-control border-primary rounded-3" value="00.00" placeholder="Precio del producto en nuevos soles" maxlength="6" pattern="^([1-9][0-9]{0,2})(\.[0-9]{1,2})?$" required>
                 </div>
             </div>
             <div class="row mb-3">

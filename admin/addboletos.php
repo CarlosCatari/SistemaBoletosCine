@@ -41,7 +41,7 @@
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="tipoboleto">Tipo</label>
-                    <input type="text" name="tipoboleto" class="form-control border-primary rounded-3" placeholder="Tipo de producto" pattern="[a-zA-Z\]+" required>
+                    <input type="text" name="tipoboleto" class="form-control border-primary rounded-3" placeholder="Tipo de boleto" pattern="[a-zA-Z\]+" required>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="precioboleto">Precio</label>

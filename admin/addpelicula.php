@@ -28,7 +28,7 @@
 
         $model->AgregarPelicula($data);
         $dtpelicula = strtoupper($nombre);
-        $msjpelicula = 'Pelicula'. $dtpelicula .' agregada correctamente.</div>';
+        $msjpelicula = 'Pelicula '. $dtpelicula .' agregada correctamente.</div>';
     }
     $fechaactual = date("Y-m-d");
 ?>

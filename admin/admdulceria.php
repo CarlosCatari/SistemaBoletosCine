@@ -49,9 +49,10 @@
     <div class="ms-3 h4">Listado de Productos Dulceria</div>
     <nav class="navbar navbar-expand-lg bg-body m-2">
         <div class="container-fluid">
-            <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
-                <form action="#">
-                    <input type="text" placeholder="Buscar pelicula">
+        <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
+                <form action="searchcliente.php" method="post">
+                    <input class="border border-primary rounded p-1" type="text" name="dnicliente" placeholder="Buscar dulceria" maxlength="8" minlength="7" pattern="[0-9]{8}">
+                    <input class="btn btn-primary mb-1" type="submit" value="buscar">
                 </form>
             </ul>
             <ul class="nav nav-underline">

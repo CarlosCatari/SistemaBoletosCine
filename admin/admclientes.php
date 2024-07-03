@@ -54,8 +54,10 @@
     <nav class="navbar navbar-expand-lg bg-body m-2">
         <div class="container-fluid">
             <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
-                <form action="#">
-                    <input type="text" placeholder="Buscar pelicula">
+                <form action="searchcliente.php" method="post">
+                    <input class="border border-primary rounded p-1" type="text" name="dnicliente" placeholder="Buscar cliente por DNI" maxlength="8" minlength="7" pattern="[0-9]{8}" disabled>
+                    <!-- <input type="text" name="namecliente" class="border border-primary rounded p-1" placeholder="Nombre cliente" pattern="[a-zA-Z\s]+"> -->
+                    <input class="btn btn-primary mb-1" type="submit" value="buscar">
                 </form>
             </ul>
             <ul class="nav nav-underline">

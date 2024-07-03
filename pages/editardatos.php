@@ -39,7 +39,7 @@
     </nav>
     <?php if (!empty($mensajemod)): ?>
         <div class="alert alert-info" role="alert">
-            <?php echo $msjadmin; ?>
+            <?php echo $mensajemod; ?>
         </div>
     <?php endif; ?>
     <div class="container-fluid d-flex justify-content-center">

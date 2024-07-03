@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     require_once "../mvc/conectar.php";
     require_once "../mvc/Local.Model.php";
     require_once "../mvc/Local.entidad.php";
@@ -7,23 +8,31 @@
 
     if(isset($_POST["dniuser"])) {
         $dni = $_POST["dniuser"];
+        $dni = $_POST["dniuser"];
         $pwd = $_POST["password"];
         $nombre = $_POST["nameuser"];
         $apellido = $_POST["surname"];
         $telefono = $_POST["phone"];
         $correo = $_POST["email"];
 
-        $data = new Local();
-        $data->__set('dni', $dni);
-        $data->__set('pwd', $pwd);
-        $data->__set('nombre', $nombre);
-        $data->__set('apellido', $apellido);
-        $data->__set('telefono', $telefono);
-        $data->__set('correo', $correo);
+        foreach ($model->buscarCliente($_REQUEST['dniuser']) as $r) { 
+            $databasedni = $r->__get('dni');
+        }
+        if ($databasedni == $dni) {
+            $mj = "El usuario ya ha sido registrado con anterioridad";
+        }else{
+            $data = new Local();
+            $data->__set('dni', $dni);
+            $data->__set('pwd', $pwd);
+            $data->__set('nombre', $nombre);
+            $data->__set('apellido', $apellido);
+            $data->__set('telefono', $telefono);
+            $data->__set('correo', $correo);
 
-        $model->AgregarCliente($data);
-        $mayususer = strtoupper($nombre);
-        $mensaje = $mayususer. " has sido registrado correctamente";
+            $model->AgregarCliente($data);
+            $mayususer = strtoupper($nombre);
+            $mensaje = $mayususer. " has sido registrado correctamente";
+            } 
     }
 ?>
 <body class="d-flex justify-content-center align-items-center vh-100" style="background-image: url('../images/fondo1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
@@ -34,6 +43,16 @@
                 <div style="font-size:2rem">Registro</div>
                 <a class="text-decoration-none text-primary fw-semibold display-6" href="loguin.php">X</a>
             </div>
+            <?php if (!empty($mensaje)): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?php echo $mensaje; ?>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty($mj)): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?php echo $mj; ?>
+                </div>
+            <?php endif; ?>
             <div class="d-flex justify-content-evenly align-items-center mb-3">
                 <div style="width:20rem">
                     <label for="document" class="form-label">Documento de identidad:</label>
@@ -67,11 +86,7 @@
             <div class="d-flex justify-content-center align-items-center mb-3">
                 <button type="submit" class="btn btn-primary text-white w-100 mt-4 ms-4 me-3">Registrar</button>
             </div>
-            <?php if (!empty($mensaje)): ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <?php echo $mensaje; ?>
-                </div>
-            <?php endif; ?>
+            
         </div>
     </form>
 </body>
