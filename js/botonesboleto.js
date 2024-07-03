@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const counters = document.querySelectorAll('#contenedor1');
     const contadorboletoElement = document.getElementById('contadorboleto');
+    const contadorbadge = document.getElementById('badge1');
+    
     let contadorboleto = 0;
 
     const updatecontadorboleto = () => {
@@ -10,6 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
             contadorboleto += counterValue;
         });
         contadorboletoElement.textContent = contadorboleto;
+
+        if (contadorboleto > 0) {
+            contadorbadge.textContent = contadorboleto;
+            document.getElementById('badge1').classList.remove('d-none');
+        } else {
+            document.getElementById('badge1').classList.add('d-none');
+        }
     };
 
     counters.forEach(counterContainer => {

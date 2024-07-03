@@ -9,6 +9,18 @@
     session_start();
     $user = $_SESSION['username'];
     $dniuser = $_SESSION['dni'];
+
+    if (isset($_POST['idpelicula'])) {
+        $idpelicula = $_POST['idpelicula'];
+    }
+    
+    foreach ($model-> buscarPelicula($idpelicula) as $r):
+        $nombrepelicula = $r->__get('nombrepelicula');
+        $urlpelicula = "../images/".$r->__get('imagen');
+            if (empty($urlpelicula)) {
+                $urlpelicula = 'images/fondopeliculapd.png';
+            }
+    endforeach;
 ?>
 
 
@@ -32,20 +44,6 @@
                 </div>
                 <script src="../js/timer.js"></script>
             </div>
-
-            <?php
-                if (isset($_POST['idpelicula'])) {
-                    $idpelicula = $_POST['idpelicula'];
-                }
-                
-                foreach ($model-> buscarPelicula($idpelicula) as $r):
-                    $nombrepelicula = $r->__get('nombrepelicula');
-                    $urlpelicula = "../images/".$r->__get('imagen');
-                        if (empty($urlpelicula)) {
-                            $urlpelicula = 'images/fondopeliculapd.png';
-                        }
-                endforeach;
-            ?>
             <div class="container-fluid d-flex justify-content-center mb-2">
                 <img src="<?php echo $urlpelicula; ?>" class="rounded-circle" alt="plc" style="width: 200px; height: 200px;">
             </div>
@@ -54,7 +52,6 @@
                 <?php echo '<span>'.$nombrepelicula.'</span>'; ?>
             </div>
             <hr>
-
             <div>
                 <img class="pb-2" src="../icons/calendario.png" alt="calendario" style="width: 25px;">
                 <?php
@@ -63,9 +60,8 @@
                 ?>
             </div>
             <script src="../js/turno.js"></script>
+
             <script src="../js/asientos.js"></script>
-
-
             <form action="resumen.php" method="POST">
                 <div> 
                     <img class="pb-2" src="../icons/reloj.png" alt="hora" style="width: 25px;">
@@ -125,10 +121,11 @@
                 <a class="nav-link active" id="section1-tab" data-toggle="tab" href="#section1" role="tab" aria-controls="section1" aria-selected="true">1. Selecciona tus butacas y turno</a>
                 </li>
                 <li class="nav-item">
-                <a onclick="limpiartotal()"class="nav-link" id="section2-tab" data-toggle="tab" href="#section2" role="tab" aria-controls="section2" aria-selected="false">2. Entradas</a>
+                <a onclick="limpiartotal()"class="nav-link" id="section2-tab" data-toggle="tab" href="#section2" role="tab" aria-controls="section2" aria-selected="false">2. Entradas<span id="badge1" class="d-none ms-3 mx-0 top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
+                </a>
                 </li>
                 <li class="nav-item">
-                <a onclick="copiarDatos(); desmarcarRadios(); limpiartotal()" class="nav-link" id="section3-tab" data-toggle="tab" href="#section3" role="tab" aria-controls="section3" aria-selected="false">3. Dulceria</a>
+                <a onclick="copiarDatos(); desmarcarRadios(); limpiartotal()" class="nav-link" id="section3-tab" data-toggle="tab" href="#section3" role="tab" aria-controls="section3" aria-selected="false">3. Dulceria<span id="badge2" class="d-none ms-3 mx-0 top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></a>
                 </li>
                 <li class="nav-item">
                 <a onclick="CalcularDatosBoletos(); copiarDatos(); desmarcarRadios()" class="nav-link" id="section4-tab" data-toggle="tab" href="#section4" role="tab" aria-controls="section4" aria-selected="false">4. Pago</a>
@@ -141,6 +138,7 @@
                         <div class="container-fluid text-center d-flex flex-column align-items-center">
                             <div>
                             <div class="d-flex justify-content-center">
+                                <span class="mt-2">Seleccione horario <img class="pb-1" src="../icons/reloj.png" alt="hora" style="width: 25px;"></span>
                                 <?php 
                                     foreach ($model->listarhorario() as $r):
                                         $horario = $r->__get('turno');
@@ -190,16 +188,13 @@
                     </div>
                 </div>
 
-                
                 <div class="tab-pane fade " id="section2" role="tabpanel" aria-labelledby="section2-tab">
                     <div class="container mt-3">
                         <div class="row">
-
-
-                        
                             <div class="col-6">
                                 <div class="row w-100 d-flex align-items-center">
                                     <p class="fw-bold fs-4">Entradas Generales</p>
+                                    
                                     <?php foreach ($model->listarboleto() as $r): 
                                         $idboleto = $r->__get('idboleto');
                                         $tipoboleto = $r->__get('tipoboleto');
@@ -233,10 +228,8 @@
                                             document.getElementById('preciboletos').textContent = total.toFixed(2);
                                         }
                                     </script>
-
                                 </div>
                             </div>
-
                             <div class="col-6">
                                 <div class="row w-100 d-flex align-items-center">
                                     <p class="fw-bold fs-4">Descuentos</p>
@@ -250,6 +243,35 @@
                     </div>
                 </div>
                 <script src="../js/botonesboleto.js"></script>
+
+
+    
+
+<script>
+    function updateCounter(id, change) {
+        let counter = document.getElementById(`counterValue-${id}`);
+        let value = parseInt(counter.textContent) + change;
+        if (value < 0) value = 0; // Prevent negative values
+        counter.textContent = value;
+
+        updateTotal();
+    }
+
+    function updateTotal() {
+        let total = 0;
+        <?php foreach ($model->listarboleto() as $r): ?>
+        let id = <?php echo $r->__get('idboleto'); ?>;
+        let quantity = parseInt(document.getElementById(`counterValue-${id}`).textContent);
+        total += quantity;
+        <?php endforeach; ?>
+        
+        document.getElementById('totalBadge').textContent = total;
+    }
+</script>
+
+
+
+
 
 
                 <div class="tab-pane fade" id="section3" role="tabpanel" aria-labelledby="section3-tab">
@@ -275,38 +297,31 @@
                                     <span class="label2 fs-4" id="valueAmount-<?php echo $iddulceria; ?>">0</span>
                                     <button class="btn btn-outline-primary mb-3 rounded-circle button increment2">+</button>
                                     <span id="valuePrice-<?php echo $iddulceria; ?>" class="mx-3 fs-5"><?php echo $preciodulceria; ?></span>
-                    </div>
                                 </div>
-
+                                </div>
                                 <div class="col ">
                                     <img class="m-4" src="../images/fondodulceria.png" alt="imagenpelicula" style="height: 180px;">
                                 </div>
-
-                                </div>
-                                
                             </div>
                         </div>
-                        <?php endforeach; ?>
-                        
-                        <script>
-                            function CalcularDatosBoletos(){
-                                let totaldulceria = 0;
-                                    for (let x = 1; x <= <?php echo $iddulceria; ?>; x++) {
-                                        let ctddulceria = parseInt(document.getElementById(`valueAmount-${x}`).textContent);
-                                        let pcodulceria = parseFloat(document.getElementById(`valuePrice-${x}`).textContent);
-                                        totaldulceria += ctddulceria * pcodulceria;
-                                    }
-                                document.getElementById('precioprd').textContent = totaldulceria.toFixed(2);
-                            }
-                        </script>
-
+                    </div>
+                    <?php endforeach; ?> 
+                    <script>
+                        function CalcularDatosBoletos(){
+                            let totaldulceria = 0;
+                                for (let x = 1; x <= <?php echo $iddulceria; ?>; x++) {
+                                    let ctddulceria = parseInt(document.getElementById(`valueAmount-${x}`).textContent);
+                                    let pcodulceria = parseFloat(document.getElementById(`valuePrice-${x}`).textContent);
+                                    totaldulceria += ctddulceria * pcodulceria;
+                                }
+                            document.getElementById('precioprd').textContent = totaldulceria.toFixed(2);
+                        }
+                    </script>
                     </div>
                 </div>
                 </div>
                 <script src="../js/botonesdulceria.js"></script>
                 </div>
-
-
                 <div class="tab-pane fade" id="section4" role="tabpanel" aria-labelledby="section4-tab">
                 <div class="container mt-3">
                     <?php 
@@ -333,15 +348,12 @@
                         <img src="../icons/visa.jpg" alt="visa" style="width: 50px;">
                         <img src="../icons/american.png" alt="visa" style="width: 50px;">
                         <img src="../icons/mastercard.png" alt="visa" style="width: 50px;"><br>
-
                         <select class="border border-primary p-1 rounded-2 w-25" name="tipotj" id="tipotj" disabled>
                             <option value="" disabled selected>Tipo de Tarjeta</option>
                             <option value="Crédito">Crédito</option>
                             <option value="Débito">Débito</option>
                         </select>
                         <input id="numtarjeta" class="border border-primary p-1 rounded-2  w-25" type="text" placeholder="Número de la tarjeta" maxlength="16" minlength="16" pattern="\d{16}" required disabled>
-                        
-
                         <select class="border border-primary p-1 rounded-2 m-2 " name="mes" id="mes" required disabled>
                             <option value="Mes">Mes</option>
                             <option value="01">01</option>
@@ -368,7 +380,6 @@
                         </select>
                         
                         <input id="numcvv" class="border border-primary p-1 rounded-2 m-2 " type="text" placeholder="CVV" maxlength="4" minlength="3" pattern="\d{4}" required disabled><br>
-
                         <select class="border border-primary p-1 rounded-2 mt-2  w-25" name="tipodoc" id="tipodoc" disabled>
                             <option value="Tipo de Documento">Tipo de Documento</option>
                             <option value="DNI">DNI</option>
@@ -406,7 +417,6 @@
                             btnResumen.disabled = false;
                         }
                     </script>
-
                     <hr>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="opciones" id="opcion2" value="opcion2">
@@ -462,7 +472,6 @@
                         }
                     </script>
                     <script src="../js/billeteras.js"></script>
-                    
                 </div>
                 <script src="../js/botonespago.js"></script>
                 </div>

@@ -30,7 +30,6 @@
         public $idhorario;
         public $turno;
         
-
         public function __get($k){
             return $this->$k;
         }

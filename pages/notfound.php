@@ -1,7 +1,4 @@
-<?php
-    session_start();
-    include('../est/header.php'); 
-?>
+<?php include('../est/header.php'); ?>
 <body class="d-flex justify-content-center align-items-center vh-100">
     <div class="text-center">
         <img src="../images/construccion.jpg" alt="construccion" style="width: 500px;">

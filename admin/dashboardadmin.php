@@ -2,15 +2,12 @@
     require_once "../mvc/conectar.php";
     require_once "../mvc/Local.Model.php";
     require_once "../mvc/Local.entidad.php";
-
     $loc = new local();
     $model = new LocalModel();
-
     include('../est/header.php');
-    session_start();
 
-    $user = $_SESSION['usernameadmin'];
-    $dniuser = $_SESSION['dniadmin'];
+    session_start();
+    $user = strtoupper($_SESSION['usernameadmin']);
 ?>
 <body class="d-flex flex-column vh-100" style="background-image: url('../images/fondodashboard.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <nav class="navbar navbar-expand-lg bg-body position-relative" style="z-index: 1;">

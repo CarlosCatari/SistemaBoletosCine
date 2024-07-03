@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const counters = document.querySelectorAll('#contenedor2');
     const contadordulceriaElement = document.getElementById('contadordulceria');
+    const contadorbadge2 = document.getElementById('badge2');
     let contadordulceria = 0;
 
     const updatecontadordulceria = () => {
@@ -10,6 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
             contadordulceria += counterValue;
         });
         contadordulceriaElement.textContent = contadordulceria;
+
+        if (contadordulceria > 0) {
+            contadorbadge2.textContent = contadordulceria;
+            document.getElementById('badge2').classList.remove('d-none');
+        } else {
+            document.getElementById('badge2').classList.add('d-none');
+        }
     };
 
     counters.forEach(counterContainer => {

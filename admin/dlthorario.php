@@ -34,13 +34,13 @@
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="cdhorariodlt">Codigo</label>
-                    <input type="text" name="cdhorariodlt" class="form-control border-primary rounded-3" value="<?php echo $idhorario; ?>" required>
+                    <input type="text" name="cdhorariodlt" class="form-control border-danger bg-light rounded-3" value="<?php echo $idhorario; ?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="turno">Turno</label>
-                    <input type="text" name="turnohorario" class="form-control border-primary rounded-3" value="<?php echo $turno; ?>">
+                    <input type="text" name="turnohorario" class="form-control border-danger bg-light rounded-3" value="<?php echo $turno; ?>" disabled>
                 </div>
             </div>
             <div class="form-group">

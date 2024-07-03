@@ -39,37 +39,37 @@
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="cdadmin">Codigo</label>
-                    <input type="text" name="cdadmin" class="form-control border-primary rounded-3" value="<?php echo $idadmin; ?>" required>
+                    <input type="text" name="cdadmin" class="form-control border-danger bg-light rounded-3" value="<?php echo $idadmin; ?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="dniadmin">DNI</label>
-                    <input type="text" name="dniadmin" class="form-control border-primary rounded-3" value="<?php echo $dniadmin; ?>" required>
+                    <input type="text" name="dniadmin" class="form-control border-danger bg-light rounded-3" value="<?php echo $dniadmin; ?>" disabled>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="pwdadmin">Contraseña</label>
-                    <input type="text" name="pwdadmin" class="form-control border-primary rounded-3" value="<?php echo $pwdadmin; ?>" required>
+                    <input type="text" name="pwdadmin" class="form-control border-danger bg-light rounded-3" value="<?php echo $pwdadmin; ?>" disabled>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="nombreadmin">Nombre</label>
-                    <input type="text" name="nombreadmin" class="form-control border-primary rounded-3" value="<?php echo $nombreadmin; ?>" required>
+                    <input type="text" name="nombreadmin" class="form-control border-danger bg-light rounded-3" value="<?php echo $nombreadmin; ?>" disabled>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="apeadmin">Apellido</label>
-                    <input type="text" name="apeadmin" class="form-control border-primary rounded-3" value="<?php echo $apellidoadmin; ?>" required>
+                    <input type="text" name="apeadmin" class="form-control border-danger bg-light rounded-3" value="<?php echo $apellidoadmin; ?>" disabled>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="teladmin">Telefono</label>
-                    <input type="text" name="teladmin" class="form-control border-primary rounded-3" value="<?php echo $telefonoadmin; ?>" required>
+                    <input type="text" name="teladmin" class="form-control border-danger bg-light rounded-3" value="<?php echo $telefonoadmin; ?>" disabled>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="correoadmin">Correo</label>
-                    <input type="text" name="correoadmin" class="form-control border-primary rounded-3" value="<?php echo $correoadmin; ?>" required>
+                    <input type="text" name="correoadmin" class="form-control border-danger bg-light rounded-3" value="<?php echo $correoadmin; ?>" disabled>
                 </div>
             </div>
 

@@ -14,3 +14,4 @@ function mostrarHorario(tiempo) {
     });
     event.target.classList.add('active');
 }
+

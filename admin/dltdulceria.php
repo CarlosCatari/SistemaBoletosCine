@@ -37,27 +37,27 @@
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="coddulceria">Codigo</label>
-                    <input type="text" name="coddulceria" class="form-control border-primary rounded-3" value="<?php echo $iddulceria; ?>" required>
+                    <input type="text" name="coddulceria" class="form-control border-danger bg-light rounded-3" value="<?php echo $iddulceria; ?>" readonly>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="tipodulceria">Tipo</label>
-                    <input type="text" name="tipodulceria" class="form-control border-primary rounded-3" value="<?php echo $tipo; ?>" required>
+                    <input type="text" name="tipodulceria" class="form-control border-danger bg-light rounded-3" value="<?php echo $tipo; ?>" disabled>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="pdtdulceria">Producto</label>
-                    <input type="text" name="pdtdulceria" class="form-control border-primary rounded-3" value="<?php echo $producto; ?>" required>
+                    <input type="text" name="pdtdulceria" class="form-control border-danger bg-light rounded-3" value="<?php echo $producto; ?>" disabled>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="pciodulceria">Precio</label>
-                    <input type="text" name="pciodulceria" class="form-control border-primary rounded-3" placeholder="00.00" value="<?php echo $precio; ?>" required>
+                    <input type="text" name="pciodulceria" class="form-control border-danger bg-light rounded-3" placeholder="00.00" value="<?php echo $precio; ?>" disabled>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-12 form-group">
                     <label for="dcripdulceria">Descripcion</label>
-                    <input type="text" name="dcripdulceria" class="form-control border-primary rounded-3" value="<?php echo $descripcion; ?>" required>
+                    <input type="text" name="dcripdulceria" class="form-control border-danger bg-light rounded-3" value="<?php echo $descripcion; ?>" disabled>
                 </div>
             </div>
             

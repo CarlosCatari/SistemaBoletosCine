@@ -140,7 +140,6 @@
                 die($e->getMessage());
             }
         }
-
         public function AgregarCliente(Local $data){
             try {
                 $stm = "INSERT INTO clientes (dni, pwd, nombre, apellido, telefono, correo) VALUES (?, ?, ?, ?, ?, ?)";
@@ -156,7 +155,6 @@
                 die($e->getMessage());
             }
         } 
-        
         public function listarCliente(){
             try {
                 $result = array();
@@ -178,7 +176,6 @@
                 die($e->getMessage());
             }
         }
-
         public function buscarIdCliente($idcliente){
             try {
                 $result = array();
@@ -248,8 +245,6 @@
                 die($e->getMessage());
             }
         }
-        
-
         public function ActualizarPelicula(Local $data){
             try {
                 $stm = "UPDATE pelicula SET nombrepelicula = ?, sinopsis = ?, director = ?, genero = ?, idioma = ? , fechaestreno = ? , duracion = ? , imagen = ? WHERE idpelicula = ?";
@@ -268,7 +263,6 @@
                 die($e->getMessage());
             }
         }
-
         public function AgregarPelicula(Local $data){
             try {
                 $stm = "INSERT INTO pelicula (nombrepelicula, sinopsis, director, genero, idioma, fechaestreno, duracion, imagen) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -286,7 +280,6 @@
                 die($e->getMessage());
             }
         } 
-
         public function buscarPelicula($idpelicula){
             try {
                 $result = array();
@@ -318,8 +311,29 @@
                 die($e->getMessage());
             }
         }
-
-
+        public function buscarNombrePelicula($nombrepelicula){
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare('SELECT * FROM cetpagolocal WHERE nombrepelicula LIKE :nombrepelicula');
+                $stm->Execute();
+                foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
+                    $loc = new local();
+                    $loc->__Set('idpelicula', $r->idpelicula);
+                    $loc->__Set('nombrepelicula', $r->nombrepelicula);
+                    $loc->__Set('sinopsis', $r->sinopsis);
+                    $loc->__Set('director', $r->director);
+                    $loc->__Set('genero', $r->genero);
+                    $loc->__Set('idioma', $r->idioma);
+                    $loc->__Set('fechaestreno', $r->fechaestreno);
+                    $loc->__Set('duracion', $r->duracion);
+                    $loc->__Set('imagen', $r->imagen);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
 
         public function listarhorario(){
             try {
@@ -382,7 +396,6 @@
                 die($e->getMessage());
             }
         }
-
 
         public function listardulceria(){
             try {
@@ -528,6 +541,5 @@
                 die($e->getMessage());
             }
         }
-
     }
 ?>

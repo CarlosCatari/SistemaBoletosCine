@@ -53,7 +53,6 @@
                 $sipnopsis = $r->__get('sinopsis');
                 $director = $r->__get('director');
         ?>
-
         <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
             <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
             <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
@@ -72,11 +71,7 @@
                 </div>
             </div>
         </div>
-
-
-    <?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
-
-
 </body>
 <?php include('../est/footer.php'); ?>

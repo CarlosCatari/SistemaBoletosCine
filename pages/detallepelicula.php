@@ -2,11 +2,10 @@
     require_once "../mvc/conectar.php";
     require_once "../mvc/Local.Model.php";
     require_once "../mvc/Local.entidad.php";
-
     $loc = new local();
     $model = new LocalModel();
-
     include('../est/header.php');
+
     session_start();
     $user = $_SESSION['username'];
     $dniuser = $_SESSION['dni'];
@@ -15,28 +14,25 @@
         $idpelicula = $_POST['idpelicula'];
     }
 
+    foreach ($model-> buscarPelicula($idpelicula) as $r):
+        $idpelicula = $r->__get('idpelicula');
+        $nombrepelicula = $r->__get('nombrepelicula');
+        $urlpelicula = "../images/".$r->__get('imagen');
+            if (empty($urlpelicula)) {
+                $urlpelicula = '../images/fondo_peliculas.jpg';
+            }
+        $sipnopsis = $r->__get('sinopsis');
+        $director = $r->__get('director');
+        $duracion = $r->__get('duracion');
+        $genero = $r->__get('genero');
+    endforeach;
+
+    $dateTime = DateTime::createFromFormat('H:i:s', $duracion);
+    $hours = (int) $dateTime->format('H');
+    $minutes = (int) $dateTime->format('i');
+    $timemovie = $hours. "hrs ". $minutes."min";
 ?>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">CineStar</a>
-            <ul class="nav nav-underline me-auto mb-2 mb-lg-0 ">
-                <li class="nav-item"><a class="nav-link" href="datoscliente.php">Mis Datos</a></li>
-                <li class="nav-item"><a class="nav-link active disabled" href="#">Peliculas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Promociones</a></li>
-                <li class="nav-item"><a class="nav-link" href="dulceria.php">Dulceria</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contactanos</a></li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar pelicula" aria-label="Search">
-                <button class="btn btn-primary" type="submit">Buscar</button>
-            </form>
-            <ul class="nav nav-underline ">
-                <li class="nav-item ms-3"><a class="nav-link" href="loguin.php">Cerrar Sesion</a></li>
-            </ul>
-            </div>
-        </div>
-    </nav>
     <nav class="navbar navbar-expand-lg bg-primary">
         <div>
             <a class="navbar-brand fw-bold px-2" href="peliculas.php">
@@ -44,28 +40,7 @@
             </a>
         </div>
     </nav>
-
     <div class="container-fluid d-flex" >
-        <?php
-            foreach ($model-> buscarPelicula($idpelicula) as $r):
-                $idpelicula = $r->__get('idpelicula');
-                $nombrepelicula = $r->__get('nombrepelicula');
-                $urlpelicula = "../images/".$r->__get('imagen');
-                    if (empty($urlpelicula)) {
-                        $urlpelicula = 'images/fondo_peliculas.jpg';
-                    }
-                $sipnopsis = $r->__get('sinopsis');
-                $director = $r->__get('director');
-                $duracion = $r->__get('duracion');
-                $genero = $r->__get('genero');
-            endforeach;
-
-            $dateTime = DateTime::createFromFormat('H:i:s', $duracion);
-            $hours = (int) $dateTime->format('H');
-            $minutes = (int) $dateTime->format('i');
-            $timemovie = $hours. "hrs ". $minutes."min";
-        ?>
-        
         <div class="container text-center pt-4">
             <div class="row align-items-center">
                 <div class="col">
@@ -90,7 +65,5 @@
             </div>
         </div>
     </div>
-
-    
 </body>
 <?php include('../est/footer.php'); ?>

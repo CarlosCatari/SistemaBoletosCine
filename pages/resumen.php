@@ -2,21 +2,24 @@
     require_once "../mvc/conectar.php";
     require_once "../mvc/Local.Model.php";
     require_once "../mvc/Local.entidad.php";
-
     $loc = new local();
     $model = new LocalModel();
-?>
-<?php 
     include('../est/header.php');
+    
     session_start();
     $user = $_SESSION['dni'];
 ?>
+<script>
+        function printPage() {
+            window.print();
+        }
+</script>
 <body class="bg-info">
     <div class="container w-50 bg-white">
     <div class="container-fluid d-flex justify-content-between align-items-center">
         <div style="font-size:2rem">Resumen de compra</div>
         <div class="ms-auto">
-            <a href="#" class="btn btn-primary m-2">Imprimir</a>
+            <a onclick="printPage()" class="btn btn-primary m-2">Imprimir</a>
             <a href="peliculas.php" class="btn btn-primary m-2">Volver al Inicio</a>
         </div>
     </div>

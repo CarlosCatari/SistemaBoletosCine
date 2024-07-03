@@ -36,23 +36,23 @@
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="cdboleto">Codigo</label>
-                    <input type="text" name="cdboleto" class="form-control border-primary rounded-3" value="<?php echo $idboleto; ?>" required>
+                    <input type="text" name="cdboleto" class="form-control border-danger bg-light rounded-3" value="<?php echo $idboleto; ?>" readonly>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6 form-group">
                     <label for="tipoboleto">Tipo</label>
-                    <input type="text" name="tipoboleto" class="form-control border-primary rounded-3" value="<?php echo $tipoboleto; ?>" required>
+                    <input type="text" name="tipoboleto" class="form-control border-danger bg-light rounded-3" value="<?php echo $tipoboleto; ?>" disabled>
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="precboleto">Precio</label>
-                    <input type="text" name="precboleto" class="form-control border-primary rounded-3" value="<?php echo $precioboleto; ?>" required>
+                    <input type="text" name="precboleto" class="form-control border-danger bg-light rounded-3" value="<?php echo $precioboleto; ?>" disabled>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-12 form-group">
                     <label for="desripcionboleto">Descripcion</label>
-                    <input type="text" name="desripcionboleto" class="form-control border-primary rounded-3" value="<?php echo $descripcionboleto; ?>" required>
+                    <input type="text" name="desripcionboleto" class="form-control border-danger bg-light rounded-3" value="<?php echo $descripcionboleto; ?>" disabled>
                 </div>
             </div>
             <div class="form-group">
