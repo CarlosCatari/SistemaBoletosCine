@@ -181,12 +181,20 @@
                             <div class="align-items-center d-flex justify-content-center px-3 pb-3">Disponible</div>
                             <div class='p-2 mb-3 ms-2 btn btn-outline-primary disabled'>AA</div>
                             <div class="align-items-center d-flex justify-content-center px-3 pb-3">Ocupado</div>
-                            <div class='p-2 mb-3 ms-2s btn btn-outline-danger active'>AA</div>
+                            <div class='p-2 mb-3 ms-2 btn btn-outline-danger active'>AA</div>
                             <div class="align-items-center d-flex justify-content-center px-3 pb-3">Seleccionado</div>
-                            <div class='p-2 mb-3 ms-2s btn btn-outline-primary active'>AA</div>
+                            <div class='p-2 mb-3 ms-2 btn btn-outline-primary active'>AA</div>
+                            <div class="d-flex justify-content-end align-items-center flex-grow-1 px-3 pb-3">
+                                <button class="btn btn-primary p-2 text-black fw-bold" onclick="goToSection2(); limpiartotal()">Continuar<img src="../icons/derecha.png" class="ms-2" alt="adelante" style="width: 20px;"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <script>
+                    function goToSection2() {
+                        $('#section2-tab').tab('show');
+                    }
+                </script>
 
                 <div class="tab-pane fade " id="section2" role="tabpanel" aria-labelledby="section2-tab">
                     <div class="container mt-3">
@@ -239,39 +247,39 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row">
+                            <div class="d-flex justify-content-end align-items-center flex-grow-1 px-3 pb-3">
+                                <button class="btn btn-primary p-2 text-black fw-bold" onclick="goToSection3(); copiarDatos(); desmarcarRadios(); limpiartotal()">Continuar<img src="../icons/derecha.png" class="ms-2" alt="adelante" style="width: 20px;"></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <script src="../js/botonesboleto.js"></script>
-
-
-    
-
-<script>
-    function updateCounter(id, change) {
-        let counter = document.getElementById(`counterValue-${id}`);
-        let value = parseInt(counter.textContent) + change;
-        if (value < 0) value = 0;
-        counter.textContent = value;
-
-        updateTotal();
-    }
-
-    function updateTotal() {
-        let total = 0;
-        <?php foreach ($model->listarboleto() as $r): ?>
-        let id = <?php echo $r->__get('idboleto'); ?>;
-        let quantity = parseInt(document.getElementById(`counterValue-${id}`).textContent);
-        total += quantity;
-        <?php endforeach; ?>
-        
-        document.getElementById('totalBadge').textContent = total;
-    }
-</script>
-
-
-
-
-
+                <script>
+                    function goToSection3() {
+                        $('#section3-tab').tab('show');
+                    }
+                </script>
+                <script>
+                    function updateCounter(id, change) {
+                        let counter = document.getElementById(`counterValue-${id}`);
+                        let value = parseInt(counter.textContent) + change;
+                        if (value < 0) value = 0;
+                        counter.textContent = value;
+                        updateTotal();
+                    }
+                    function updateTotal() {
+                        let total = 0;
+                        <?php foreach ($model->listarboleto() as $r): ?>
+                        let id = <?php echo $r->__get('idboleto'); ?>;
+                        let quantity = parseInt(document.getElementById(`counterValue-${id}`).textContent);
+                        total += quantity;
+                        <?php endforeach; ?>
+                        
+                        document.getElementById('totalBadge').textContent = total;
+                    }
+                </script>
 
                 <div class="tab-pane fade" id="section3" role="tabpanel" aria-labelledby="section3-tab">
                 <div class="container mt-3">
@@ -291,15 +299,15 @@
                                     <h5 class="card-title"><?php echo $tipodulceria; ?></h5>
                                     <p class="card-text"><?php echo $proddulceria; ?></p>
                                     <p class="card-text"><?php echo $descripdulceria; ?></p>
-                                    <<div class="mt-auto counter-container" id="contenedor2">
+                                    <div class="mt-auto counter-container" id="contenedor2">
                                     <button class="btn btn-outline-primary mb-3 ms-2 rounded-circle button decrement2">-</button>
-                                    <span class="label2 fs-4" id="valueAmount-<?php echo $iddulceria; ?>">0</span>
+                                    <span class="label2 fs-4 mx-2 mt-4 fs-4" id="valueAmount-<?php echo $iddulceria; ?>">0</span>
                                     <button class="btn btn-outline-primary mb-3 rounded-circle button increment2">+</button>
                                     <span id="valuePrice-<?php echo $iddulceria; ?>" class="mx-3 fs-5"><?php echo $preciodulceria; ?></span>
                                 </div>
                                 </div>
                                 <div class="col ">
-                                    <img class="m-4" src="../images/fondodulceria.png" alt="imagenpelicula" style="height: 180px;">
+                                    <img class="m-4 rounded" src="../images/fondodulceria.png" alt="imagenpelicula" style="height: 180px;">
                                 </div>
                             </div>
                         </div>
@@ -317,9 +325,18 @@
                         }
                     </script>
                     </div>
+                    <div class="d-flex justify-content-end align-items-center flex-grow-1 px-3 pb-3 mt-2">
+                        <button class="btn btn-primary p-2 text-black fw-bold" onclick="goToSection4(); CalcularDatosBoletos(); copiarDatos(); desmarcarRadios()">Continuar<img src="../icons/derecha.png" class="ms-2" alt="adelante" style="width: 20px;"></button>
+                    </div>
                 </div>
                 </div>
                 <script src="../js/botonesdulceria.js"></script>
+                <script>
+                    function goToSection4() {
+                        $('#section4-tab').tab('show');
+                    }
+                </script>
+
                 </div>
                 <div class="tab-pane fade" id="section4" role="tabpanel" aria-labelledby="section4-tab">
                 <div class="container mt-3">
@@ -339,8 +356,9 @@
                     <hr>
                     <div class="h4">Elige una forma de pago:</div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opciones" id="opcion1" value="opcion1">
-                        <label class="form-check-label" for="opcion1">Tarjeta de Crédito o Débito</label>
+                        <img src="../icons/izquierda.png" class="mb-1" alt="adelante" style="width: 10px;">
+                        <input class="form-check-input" type="radio" name="opciones" id="opcion1" value="opcion1" style="border-color: #00f;">
+                        <label class="form-check-label fw-bold" for="opcion1">Tarjeta de Crédito o Débito</label>
                     </div>
                     <form id="paymentForm">
                     <div id="contenedor-tarjeta" class="mt-3">
@@ -418,8 +436,9 @@
                     </script>
                     <hr>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="opciones" id="opcion2" value="opcion2">
-                        <label class="form-check-label" for="opcion2">Billetera Electrónica</label>
+                        <img src="../icons/izquierda.png" class="mb-1" alt="adelante" style="width: 10px;">
+                        <input class="form-check-input" type="radio" name="opciones" id="opcion2" value="opcion2"  style="border-color: #00f;">
+                        <label class="form-check-label fw-bold" for="opcion2">Billetera Electrónica</label>
                     </div>
                     <div id="contenedor-billetera" class="mt-3">
                         <select class="border border-primary p-1 rounded-2 w-25" name="tipodoc" id="tipodoc2" disabled>
@@ -432,7 +451,7 @@
                         <input class="border border-primary p-1 rounded-2 m-1 w-25" type="text" placeholder="Número de celular" id="numero-celular" maxlength="9" pattern="\d{9}" disabled required><br>
                         <div class="row justify-content-start">
                         <div class="col-6 col-sm-3">
-                            <span>Total a Pagar: S/.</span>
+                            <span class="mt-2">Total a Pagar: S/.</span>
                             <span id="preciototalyp">00.00</span>
                             <div id="ventana-esperando-pago" style="display: none;">
                                 <button class="btn btn-primary" type="button" disabled>
@@ -441,12 +460,12 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-6 col-sm-3">
-                            <img src="../icons/yape.png" alt="yape" style="width: 100px;">
+                        <div class="col-6 col-sm-3 mt-2">
+                            <img src="../icons/yape.png" class="rounded" alt="yape" style="width: 100px;">
                             <img src="../icons/qr.png" alt="qryape" style="width: 100px;">
                         </div>
-                        <div class="col-6 col-sm-3">
-                            <img src="../icons/plin.jpg" alt="plin" style="width: 100px; height: 100px;">
+                        <div class="col-6 col-sm-3 mt-2">
+                            <img src="../icons/plin.jpg" class="rounded" alt="plin" style="width: 100px; height: 100px;">
                             <img src="../icons/qr.png" alt="qrplin" style="width: 100px;">
                         </div>
                         </div>
