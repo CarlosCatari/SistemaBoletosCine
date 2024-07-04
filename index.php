@@ -28,6 +28,7 @@
             </ul>
             <ul class="nav align-items-center">
                 <li class="nav-item"><a class="nav-link" href="pages/loguin.php">Iniciar Sesión</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/registro.php">Registrarse</a></li>
                 <li class="nav-item"><a class="nav-link" href="pages/loguin.php"><img src="icons/usuario2.png" alt="img_usuario"></a></li>
             </ul>
         </div>
