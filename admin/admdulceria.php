@@ -49,6 +49,7 @@
     <div class="ms-3 h4">Listado de Productos Dulceria</div>
     <nav class="navbar navbar-expand-lg bg-body m-2">
         <div class="container-fluid">
+            <ul class="nav nav-underline me-auto mb-2 mb-lg-0 "></ul>
             <ul class="nav nav-underline">
                 <li class="nav-item ms-3 btn btn-primary">
                     <a href="adddulceria.php" class="text-white text-decoration-none">Agregar Producto</a>

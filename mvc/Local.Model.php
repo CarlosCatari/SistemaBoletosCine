@@ -91,6 +91,7 @@
                 $stm->Execute();
                 foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
                     $loc = new local();
+                    $loc->__Set('idadmin', $r->idadmin);
                     $loc->__Set('dniadmin', $r->dniadmin);
                     $loc->__Set('pwdadmin', $r->pwdadmin);
                     $loc->__Set('nombreadmin', $r->nombreadmin);
