@@ -127,27 +127,6 @@
                 die($e->getMessage());
             }
         }
-        /* public function buscarClientenombre($nombre){
-            try {
-                $result = array();
-                $stm = $this->pdo->prepare( 'SELECT * FROM clientes WHERE nombre = '.$nombre);
-                $stm->Execute();
-                foreach($stm->fetchAll(PDO::FETCH_OBJ) as $r){
-                    $loc = new local();
-                    $loc->__Set('idcliente', $r->idcliente);
-                    $loc->__Set('dni', $r->dni);
-                    $loc->__Set('pwd', $r->pwd);
-                    $loc->__Set('nombre', $r->nombre);
-                    $loc->__Set('apellido', $r->apellido);
-                    $loc->__Set('telefono', $r->telefono);
-                    $loc->__Set('correo', $r->correo);
-                    $result[] = $loc;
-                }
-                return $result;
-            } catch (Exception $e) {
-                die($e->getMessage());
-            }
-        } */
         public function ActualizarCliente(Local $data){
             try {
                 $stm = "UPDATE clientes SET pwd = ?, nombre = ?, apellido = ?, telefono = ?, correo = ?  WHERE dni = ?";
