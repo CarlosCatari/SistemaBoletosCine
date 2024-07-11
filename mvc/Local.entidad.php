@@ -1,5 +1,13 @@
 <?php
     class local{
+        private $idadmin;
+        private $dniadmin;
+        private $pwdadmin;
+        private $nombreadmin;
+        private $apellidoadmin;
+        private $telefonoadmin;
+        private $correoadmin;
+        
         private $idcliente;
         private $dni;
         private $pwd;
@@ -30,6 +38,12 @@
 
         public $idhorario;
         public $turno;
+
+        public $idfactura;
+        public $codfactura;
+        public $fecha;
+        public $hora;
+        public $butaca;
         
         public function __get($k){
             return $this->$k;

@@ -9,6 +9,9 @@
     session_start();
     $user = $_SESSION['username'];
     $dniuser = $_SESSION['dni'];
+    
+    $fecha = new DateTime();
+    $fechaformat = $fecha->format('d M Y');
 
     if (isset($_POST['idpelicula'])) {
         $idpelicula = $_POST['idpelicula'];
@@ -21,7 +24,32 @@
                 $urlpelicula = 'images/fondopeliculapd.png';
             }
     endforeach;
+
+    foreach ($model -> buscarCliente($dniuser) as $r):
+        $idcliente = $r->__get('idcliente');
+        $dnicli = $r->__get('dni');
+        $nombrecli = $r->__get('nombre');
+        $apellcli = $r->__get('apellido');
+        $telcli = $r->__get('telefono');
+        $correocli = $r->__get('correo');
+    endforeach;
+
+    function generarCodigo($longitud) {
+        $caracteres = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $longitudCaracteres = strlen($caracteres);
+        $codigo = '';
+        for ($i = 0; $i < $longitud; $i++) {
+            $codigo .= $caracteres[rand(0, $longitudCaracteres - 1)];
+        }
+        return $codigo;
+    }
+    $codigo = generarCodigo(10);
+
+
+
+    
 ?>
+
 
 
 <body onload="startTimer()">
@@ -49,54 +77,63 @@
             </div>
             <div>
                 <img class="pb-2" src="../icons/claqueta.png" alt="claqueta" style="width: 25px;">
-                <?php echo '<span>'.$nombrepelicula.'</span>'; ?>
+                <span id="namepelicula"><?php echo $nombrepelicula ; ?></span>
             </div>
             <hr>
             <div>
                 <img class="pb-2" src="../icons/calendario.png" alt="calendario" style="width: 25px;">
-                <?php
-                    $fecha = new DateTime();
-                    echo '<span>Hoy '.$fecha->format('d M Y').'</span>';
-                ?>
+                <span id="fechareg"><?php echo $fechaformat; ?></span>
             </div>
             <script src="../js/turno.js"></script>
 
             <script src="../js/asientos.js"></script>
-            <form action="resumen.php" method="POST">
+            <div>
                 <div> 
                     <img class="pb-2" src="../icons/reloj.png" alt="hora" style="width: 25px;">
                     <span id="horario">Hora seleccionada</span>
-                    <input type="hidden" name="horarioselect" id="horarioselect">
                 </div>
                 <div>
                     <img class="pb-2" src="../icons/butaca.png" alt="butaca" style="width: 25px;">
                     <span id="butacas-seleccionadas">Butacas seleccionadas</span>
-                    <input type="hidden" name="butacaselect" id="butacaselect">
                 </div>
                 <div>
                     <img class="pb-2" src="../icons/boletos.png" alt="boletos" style="width: 25px;">
                     <span id="contadorboleto"></span>
                     <span>Boletos - S/.</span>
                     <span id="preciboletos"></span>
-                    <input type="hidden" name="precboleto" id="precboleto">
                 </div>
                 <div>
                     <img class="pb-2" src="../icons/dulceria.png" alt="dulceria" style="width: 25px;">
                     <span id="contadordulceria"></span>
                     <span>Productos - S/.</span>
                     <span id="precioprd"></span>
-                    <input type="hidden" name="pcioprd" id="pcioprd">
                 </div>
                 <div>
                     <strong>Total:</strong> S/.<span id="preciototal">0</span>
-                    <input type="hidden" name="pciototal" id="pciototal">
                 </div>
-                <div>
-                    <button onclick="copyLabelValue()"  type="submit" id="btnResumen" class="btn btn-primary mt-3" disabled>Ver resumen de compra</button>
-                </div>
+            </div>
+
+
+            <form action="resumen.php" method="POST">
+                <input type="hidden" name="codfactura" value="<?php echo $codigo; ?>">
+                <input type="hidden" name="movieselect" value="<?php echo $idpelicula; ?>">
+                <input type="hidden" name="clienteselect" value="<?php echo $idcliente; ?>">
+
+                <input type="hidden" name="fechaselect" id="fechaselect">
+                <input type="hidden" name="horarioselect" id="horarioselect">
+                <input type="hidden" name="butacaselect" id="butacaselect">
+
+                <input type="hidden" name="precboleto" id="precboleto">
+                <input type="hidden" name="pcioprd" id="pcioprd">
+                <input type="hidden" name="pciototal" id="pciototal">
+                <input type="submit" id="btnResumen" class="btn btn-primary mt-3" value="Ver resumen de compra" disabled>
             </form>
             <script>
                 function copyLabelValue() {
+
+                    var labelValue = document.getElementById('fechareg').textContent;
+                    document.getElementById('fechaselect').value = labelValue;
+
                     var labelValue = document.getElementById('butacas-seleccionadas').textContent;
                     document.getElementById('butacaselect').value = labelValue;
 
@@ -158,15 +195,32 @@
                                     $capacidadSala = 100;
                                     $columnas = 7;
                                     $letras = range('A', 'Z');
+                                
+                                    // Lista de asientos reservados
+                                    $asientosReservados = ""; // Inicializar como cadena vacía
+
+                                    foreach ($model->listarFactura() as $r):
+                                        $butacadb = $r->__get('butaca');
+                                        $asientosReservados .= $butacadb . ", "; // Concatenar butacas separadas por coma
+                                    endforeach;
+
+                                    // Convertir la cadena a un arreglo y eliminar la última coma extra
+                                    $reservados = explode(", ", rtrim($asientosReservados, ", "));
 
                                     for ($col = 1; $col <= $columnas; $col++) {
                                         echo "<tr>";
                                         for ($fila = 1; $fila <= ceil($capacidadSala / $columnas); $fila++) {
                                             $number = ($fila - 1) * $columnas + $col;
                                             $label = $letras[$col - 1] . $fila;
-
+                                
                                             if ($number <= $capacidadSala) {
-                                                echo "<td id='$label' class='p-2 mb-3 ms-2 btn btn-outline-primary seat-button' onclick='seleccionarAsiento(\"$label\")'>$label</td>";
+                                                // Verifica si el asiento está reservado
+                                                if (in_array($label, $reservados)) {
+                                                    // Si el asiento está reservado, agrega clases y atributos para deshabilitarlo y pintarlo de rojo
+                                                    echo "<td id='$label' class='p-2 mb-3 ms-2 btn btn-outline-danger active' disabled>$label</td>";
+                                                } else {
+                                                    echo "<td id='$label' class='p-2 mb-3 ms-2 btn btn-outline-primary seat-button' onclick='seleccionarAsiento(\"$label\")'>$label</td>";
+                                                }
                                             } else {
                                                 echo '<td></td>';
                                             }
@@ -405,7 +459,7 @@
                         <input class="border border-primary p-1 rounded-2 mt-2 w-25" type="text" placeholder="Número de documento" id="numero-doc-tarjeta" maxlength="9" pattern="\d{8}" required disabled><br>
                         <span>Total a Pagar: S/.</span>
                         <span id="preciototal2">00.00</span>
-                        <input onclick="activarResumen()" class="btn btn-outline-primary m-2" id="btnPagar" type="submit" value="Pagar" disabled>
+                        <input onclick="activarResumen(); copyLabelValue()"  class="btn btn-outline-primary m-2" id="btnPagar" type="submit" value="Pagar" disabled>
                         </form>
                     </div>
                     <script>

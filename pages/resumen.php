@@ -5,24 +5,38 @@
     $loc = new local();
     $model = new LocalModel();
     include('../est/header.php');
-    
-    session_start();
-    $user = $_SESSION['dni'];
-?>
-<?php 
-    foreach ($model -> buscarCliente($user) as $r): 
-        $dniuser = " ".$r->__get('dni');
+
+    if(isset($_POST["codfactura"])) {
+        $codfactura = $_POST["codfactura"];
+        $idpelicula = $_POST["movieselect"];
+        $idcliente = $_POST["clienteselect"];
+        $fecha = $_POST["fechaselect"];
+        $hora = $_POST["horarioselect"];
+        $butaca = $_POST["butacaselect"];
+
+        $data = new Local();
+        $data->__set('codfactura', $codfactura);
+        $data->__set('idpelicula', $idpelicula);
+        $data->__set('idcliente', $idcliente);
+        $data->__set('fecha', $fecha);
+        $data->__set('hora', $hora);
+        $data->__set('butaca', $butaca);
+
+        $model->agregarFactura($data);
+
+        
+    }
+
+    foreach ($model -> buscarFactura($codfactura) as $r): 
+        $codigo = " ".$r->__get('codfactura');
+        $nombrepelicula = " ".$r->__get('nombrepelicula');
         $nombrecompleto = " ".$r->__get('nombre')." ". $r->__get('apellido');
-        $correo = " ".$r->__get('correo');
+        $fecha = " ".$r->__get('fecha');
+        $hora = " ".$r->__get('hora');
+        $butaca = " ".$r->__get('butaca');
     endforeach; 
 
-    if (isset($_POST['butacaselect'])) {
-        $butacas = $_POST['butacaselect'];
-    }
 
-    if (isset($_POST['horarioselect'])) {
-        $horario = $_POST['horarioselect'];
-    }
 
     if (isset($_POST['precboleto'])) {
         $subtotalticket = $_POST['precboleto'];
@@ -52,8 +66,8 @@
             </div>
         </div><hr>
         <div class="container-fluid text-center">
-            <div class="h4 fw-bold">Pelicula</div>
-            <div class="h6 text-primary">Nro de compra:</div>
+            <div class="h4 fw-bold"><?php echo $nombrepelicula;?></div>
+            <div class="h6 text-primary">Nro de compra: <span><?php echo $codigo; ?></span></div>
             <div>
                 <img src="../icons/qr.png" alt="qr" style="width: 120px;">
             </div>
@@ -73,11 +87,11 @@
                 </div>
                 <div class="col-md-3">
                     <img src="" alt="">
-                    <div>Fecha</div>
+                    <div><?php echo $fecha; ?></div>
                 </div>
                 <div class="col-md-3">
                     <img src="" alt="">
-                    <div><?php echo $horario; ?></div>
+                    <div><?php echo $hora; ?></div>
                 </div>
                 <div class="col-md-3">
                     <img src="" alt="">
@@ -88,7 +102,7 @@
         <div class="container-fluid">
             <div>
                 <img src="" alt="">
-                <div>Tus butacas: <span><?php echo $butacas; ?></span></div>
+                <div>Tus butacas: <span><?php echo $butaca; ?></span></div>
             </div>
         </div><hr>
         <div class="container-fluid">

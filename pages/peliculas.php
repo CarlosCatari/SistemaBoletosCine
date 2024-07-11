@@ -41,37 +41,46 @@
         <div style="font-size:2rem">Peliculas</div>
     </div>
 
-    <div class="container-fluid d-flex">
-        <?php 
-            foreach ($model->listarPelicula() as $r):
-                $idpelicula = $r->__get('idpelicula');
-                $nombrepelicula = $r->__get('nombrepelicula');
-                $urlpelicula = "../images/".$r->__get('imagen');
-                    if (empty($urlpelicula)) {
-                        $urlpelicula = 'images/fondo_peliculas.jpg';
-                    }
-                $sipnopsis = $r->__get('sinopsis');
-                $director = $r->__get('director');
-        ?>
-        <div class="card text-white text-center mr-2 mb-2" style="width: 18rem;">
-            <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
-            <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
-                <div>
-                    <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
-                </div>
-                <div class="my-auto">
-                    <form action="salas.php" method="POST" class="mb-1">
-                        <input type="hidden" name="idpelicula" value="<?php echo $idpelicula; ?>">
-                        <button type="submit" class="btn btn-primary" style="width: 10rem;"><img class="mx-2" src="../icons/ticket.png" alt="boletos" style="width: 25px;">Comprar</button>
-                    </form>
-                    <form action="detallepelicula.php" method="POST" class="mb-1">
-                        <input type="hidden" name="idpelicula" value="<?php echo $idpelicula; ?>">
-                        <button type="submit" class="btn btn-primary" style="width: 10rem;"><img class="p-1 mx-2" src="../icons/signo+.png" alt="boletos" style="width: 25px;">Detalles</button>
-                    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <?php 
+                foreach ($model->listarPelicula() as $r):
+                    $idpelicula = $r->__get('idpelicula');
+                    $nombrepelicula = $r->__get('nombrepelicula');
+                    $urlpelicula = "../images/".$r->__get('imagen');
+                        if (empty($urlpelicula)) {
+                            $urlpelicula = 'images/fondo_peliculas.jpg';
+                        }
+                    $sipnopsis = $r->__get('sinopsis');
+                    $director = $r->__get('director');
+            ?>
+            <div class="col-md-3 col-lg-3 mb-2">
+                <div class="card text-white text-center" style="width: 100%;">
+                    <img src="<?php echo $urlpelicula; ?>" class="card-img" alt="imagenpelicula">
+                    <div class="card-img-overlay d-flex flex-column justify-content-between" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <div>
+                            <h5 class="card-title"><?php echo $nombrepelicula; ?></h5>
+                        </div>
+                        <div class="my-auto">
+                            <form action="salas.php" method="POST" class="mb-1">
+                                <input type="hidden" name="idpelicula" value="<?php echo $idpelicula; ?>">
+                                <button type="submit" class="btn btn-primary" style="width: 10rem;">
+                                    <img class="mx-2" src="../icons/ticket.png" alt="boletos" style="width: 25px;">Comprar
+                                </button>
+                            </form>
+                            <form action="detallepelicula.php" method="POST" class="mb-1">
+                                <input type="hidden" name="idpelicula" value="<?php echo $idpelicula; ?>">
+                                <button type="submit" class="btn btn-primary" style="width: 10rem;">
+                                    <img class="p-1 mx-2" src="../icons/signo+.png" alt="boletos" style="width: 25px;">Detalles
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
     </div>
+
 </body>
 <?php include('../est/footer.php'); ?>

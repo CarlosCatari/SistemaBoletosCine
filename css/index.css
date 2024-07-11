@@ -32,6 +32,9 @@ body{
     text-decoration: none;
     color: #000;
     font-weight: bold;
+    margin: 0;
+    padding-top: 7px;
+    
 }
 .nav {
     list-style: none;
@@ -258,18 +261,30 @@ img {
 .containerSocio .cardContainer .back .box{
     padding: 0 20px;
 }
+
 .containerSocio .cardContainer .back .box .span{
     color: #fff;
     font-size: 15px;
 }
-.containerSocio .cardContainer .back .box .cvvBox{
+.containerSocio .cardContainer .back .box div{
+    display: flex;
+}
+.containerSocio .cardContainer .back .box div img{
+    width: 60px;
     height: 50px;
+    border-radius: 10px;
+    margin-top: 0px;
+    margin-right: 50px;
+}
+.containerSocio .cardContainer .back .box div .cvvBox{
+    height: 40px;
     padding: 10px;
     margin-top: 5px;
     color: #333;
     background: #fff;
     border-radius: 5px;
-    width: 100%;
+    width: 250px;
+
 }
 .containerSocio .cardContainer .back .box img{
     margin-top: 30px;

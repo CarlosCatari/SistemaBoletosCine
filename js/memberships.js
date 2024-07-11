@@ -3,16 +3,39 @@ document.querySelector('.card-number').oninput = () => {
     const datousuario = document.querySelector('.card-number').value;
     const usuario = formateofecha(datousuario);
     document.querySelector('.cardNumber').innerText = usuario;
+
+
+    const mes = formateomes();
+    const year = formateanio();
+    document.querySelector('.exp-month').innerText = mes;
+    document.querySelector('.exp-year').innerText = year;
+
+    function formateomes() {
+        const fechaactual = new Date();
+        const mes = fechaactual.getMonth() + 1;
+        const ciframes = mes < 10 ? '0' + mes : mes;
+        return ciframes;
+    }
+
+    function formateanio() {
+        const fechaactual = new Date();
+        const anio = fechaactual.getFullYear();
+        const aniofuturo = (anio + 5).toString().slice(-2);
+        return aniofuturo;
+    }
 }
 function formateofecha(usuariodata) {
     const fechaactual = new Date();
     const mes = fechaactual.getMonth() + 1;
     const anio = fechaactual.getFullYear().toString().slice(-2);
     const ciframes = mes < 10 ? '0' + mes : mes;
-    const formatousuario = ciframes + anio + '-' + usuariodata;
+    
+    const parte1 = usuariodata.slice(0, 4);
+    const parte2 = usuariodata.slice(4, 8);
+    const formatousuario = ciframes + anio + '-' + parte1 + '-' + parte2;
+    
     return formatousuario;
 }
-
 document.querySelector('.card-holder').oninput = () => {
     let nombreCompleto = document.querySelector('.card-holder').value;
     let nombreFormateado = convertirAMayusculas(nombreCompleto);
@@ -24,14 +47,6 @@ function convertirAMayusculas(cadena) {
         palabras[i] = palabras[i].charAt(0).toUpperCase() + palabras[i].slice(1);
     }
     return palabras.join(' ');
-}
-
-document.querySelector('.month-input').oninput = () =>{
-    document.querySelector('.exp-month').innerText = document.querySelector('.month-input').value;
-}
-
-document.querySelector('.year-input').oninput = () =>{
-    document.querySelector('.exp-year').innerText = document.querySelector('.year-input').value;
 }
 
 document.querySelector('.cvv-input').addEventListener('focus', () =>{

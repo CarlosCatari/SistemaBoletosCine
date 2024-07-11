@@ -543,5 +543,77 @@
                 die($e->getMessage());
             }
         }
+
+
+        public function agregarFactura(Local $data) {
+            try {
+                $stm = $this->pdo->prepare("INSERT INTO factura (codfactura, idpelicula, idcliente, fecha, hora, butaca) VALUES (?, ?, ?, ?, ?, ?)");
+                $stm->execute(array(
+                    $data->__get('codfactura'),
+                    $data->__get('idpelicula'),
+                    $data->__get('idcliente'),
+                    $data->__get('fecha'),
+                    $data->__get('hora'),
+                    $data->__get('butaca')
+                ));
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+
+        public function buscarFactura($codfactura) {
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare(
+                    'SELECT factura.codfactura, pelicula.nombrepelicula, clientes.nombre, clientes.apellido, factura.fecha, factura.hora, factura.butaca 
+                    FROM factura 
+                    JOIN clientes ON factura.idcliente = clientes.idcliente 
+                    JOIN pelicula ON factura.idpelicula = pelicula.idpelicula 
+                    WHERE factura.codfactura = :codfactura'
+                );
+                $stm->bindParam(':codfactura', $codfactura, PDO::PARAM_STR);
+                $stm->execute();
+                
+                foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
+                    $loc = new local();
+                    $loc->__Set('codfactura', $r->codfactura);
+                    $loc->__Set('nombrepelicula', $r->nombrepelicula);
+                    $loc->__Set('nombre', $r->nombre);
+                    $loc->__Set('apellido', $r->apellido);
+                    $loc->__Set('fecha', $r->fecha);
+                    $loc->__Set('hora', $r->hora);
+                    $loc->__Set('butaca', $r->butaca);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+        
+        public function listarFactura() {
+            try {
+                $result = array();
+                $stm = $this->pdo->prepare('SELECT factura.idfactura, factura.codfactura, pelicula.nombrepelicula, clientes.nombre, clientes.apellido, factura.fecha, factura.hora, factura.butaca FROM factura JOIN clientes ON factura.idcliente = clientes.idcliente JOIN pelicula ON factura.idpelicula = pelicula.idpelicula');
+                $stm->execute();
+                
+                foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $r) {
+                    $loc = new local();
+                    $loc->__Set('idfactura', $r->idfactura);
+                    $loc->__Set('codfactura', $r->codfactura);
+                    $loc->__Set('nombrepelicula', $r->nombrepelicula);
+                    $loc->__Set('nombre', $r->nombre); // Incluye 'nombre' si está en la tabla clientes
+                    $loc->__Set('apellido', $r->apellido); // Incluye 'apellido' si está en la tabla clientes
+                    $loc->__Set('fecha', $r->fecha);
+                    $loc->__Set('hora', $r->hora);
+                    $loc->__Set('butaca', $r->butaca);
+                    $result[] = $loc;
+                }
+                return $result;
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
+        
     }
 ?>

@@ -58,7 +58,6 @@
                 <button id="aleft" class="aleft"><img src="icons/atras.png" alt="atras"></button>
                 <div class="containerCarrusel">
                     <div class="carrusel">
-
                         <?php 
                             foreach ($model->listarPelicula() as $r):
                                 $idpelicula = $r->__get('idpelicula');
@@ -73,8 +72,11 @@
                         <div class="movie">
                             <img src="<?php echo $urlpelicula; ?>" alt="pelicula">
                             <div class="infoMovie">
-                                <a class="btn"><img src="icons/compraspelicula.png" alt="comprar" >Comprar</a>
-                                <a class="btn"><img src="icons/anadir.png" alt="masinfo">Ver Detalles</a>
+                                <a href="pages/loguin.php" class="btn"><img src="icons/compraspelicula.png" alt="comprar" >Comprar</a>
+                                <form action="pages/verpelicula.php" method="POST" class="mb-1">
+                                    <input type="hidden" name="idpelicula" value="<?php echo $idpelicula; ?>">
+                                    <button type="submit" class="btn btn-primary" style="width: 10rem;"><img class="p-1 mx-2" src="icons/signo+.png" alt="boletos" style="width: 15px;">Detalles</button>
+                                </form>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -90,54 +92,30 @@
     <section>
         <div class="containerSocio" id="containerSocio">
             <form action="#">
-                <div class="inputBox">
-                    <label>DNI</label>
-                    <input type="text" class="card-number" maxlength="8" pattern="[1-9]{8}" placeholder="Ingrese su dni"  required>
-                </div>
-                <div class="inputBox">
-                    <label for="">Titular</label>
-                    <input type="text" class="card-holder" pattern="[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+" maxlength="30" placeholder="Nombre y apellido" required>
-                </div>
                 <div class="flexbox">
                     <div class="inputBox">
-                        <label>Vencimiento mm</label>
-                        <select class="month-input" required>
-                            <option value="month" selected disabled>Mes</option>
-                            <option value="01">01</option>
-                            <option value="02">02</option>
-                            <option value="03">03</option>
-                            <option value="04">04</option>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                            <option value="08">08</option>
-                            <option value="09">09</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
-                    </div>
-                    <div class="inputBox">
-                        <label>Vencimiento yy</label>
-                        <select class="year-input" required>
-                            <option value="year" selected disabled>Año</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option>
-                            <option value="2029">2029</option>
-                            <option value="2030">2030</option>
-                            <option value="2031">2031</option>
-                            <option value="2032">2032</option>
-                            <option value="2033">2033</option>
-                            <option value="2034">2034</option>
-                        </select>
+                        <label>DNI</label>
+                        <input type="text" class="card-number" placeholder="Nº de documento" maxlength="8" minlength="7" pattern="[0-9]{8}" required>
                     </div>
                     <div class="inputBox">
                         <label>Clave</label>
-                        <input type="text"  class="cvv-input" placeholder="Min 10 caracteres"  maxlength="20" minlength="10" pattern="[1-9]{20}" required>
+                        <input type="text"  class="cvv-input" placeholder="Min 8 caracteres"  minlength="8" maxlength="20" pattern="[a-zA-Z0-9]+" required>
                     </div>
+                </div>
+                <div class="inputBox">
+                    <label for="">Titular</label>
+                    <input type="text" class="card-holder" placeholder="Nombre y Apellido" pattern="[a-zA-Z\s]+" required>
+                </div>
+                <div class="flexbox">
+                    <div class="inputBox">
+                        <label>Telefono</label>
+                        <input name="phone" type="tel" id="phone" placeholder="Teléfono" minlength="8" maxlength="9" pattern="[0-9]{9}" required>
+                    </div>
+                    <div class="inputBox">
+                        <label>Correo</label>
+                        <input name="email" type="email" id="email" placeholder="example@gmail.com" minlength="5" required>
+                    </div>
+                    
                 </div>
                 <input type="submit" value="Unirse" class="btnSubmit">
                 <input type="submit" value="Mas Info" class="btnSubmit">
@@ -149,7 +127,7 @@
                         <img src="icons/chip.png" alt="chip">
                         <img src="icons/logo-tarjeta2.png" alt="tarjeta-logo">
                     </div>
-                    <div class="cardNumber">####-########</div>
+                    <div class="cardNumber">####-####-####</div>
                     <div class="flexBox">
                         <div class="box">
                             <span>TITULAR</span>
@@ -169,7 +147,10 @@
                     <div class="stripe"></div>
                     <div class="box">
                         <span>cvv</span>
-                        <div class="cvvBox"></div>
+                        <div>
+                            <img src="icons/pegatina.png" alt="pegatina">
+                            <div class="cvvBox"></div>
+                        </div>
                         <img src="icons/logo-tarjeta2.png" alt="visa">
                         <img src="icons/seguridad.png" alt="seguridad">
                     </div>

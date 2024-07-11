@@ -1,7 +1,9 @@
 var imagenes = [
-    "images/espejo.jpg",
-    "images/garfield.jpg",
-    "images/planetasimios.png"
+    "images/tornado.png",
+    "images/villano.jpg",
+    "images/caradelaluna.jpg",
+    "images/islandiabanner.jpg",
+    "images/deadpool.jpg"
 ];
 
 var imagen = document.getElementById("imagen");
